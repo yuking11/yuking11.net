@@ -1,0 +1,36 @@
+@charset "utf-8";
+/*
+Theme Name: yuking
+Description: yuking11.net サイトテーマ
+
+Version: 1.0
+Author: yuking11
+Author URI: https://yuking11.net/
+*/
+
+/*
+* WordPress Native CSS
+*/
+
+/* for Images */
+img[class*="wp-image-"],
+img[class*="attachment-"] {
+  max-width: 100%;
+  height: auto;
+}
+
+/*スクリーンが768px以上のときの指定*/
+@media screen and (min-width: 768px) {
+  .aligncenter {
+    display: block;
+    margin: 0 auto .8em;
+  }
+  .alignleft {
+    float: left;
+    margin: 0 .8em .8em 0;
+  }
+  .alignright {
+    float: right;
+    margin: 0 0 .8em .8em;
+  }
+}

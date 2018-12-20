@@ -1,0 +1,31 @@
+// =====================================================
+//
+// page-a Style
+// - 共通
+// - parts-a
+//
+// =====================================================
+
+// 共通
+// ================================== //
+.page-a {
+  @include mq(tab) {
+  }// @include mq(tab)
+  @include mq(pc) {
+  }// @include mq(pc)
+  @include mq(wide) {
+  }// @include mq(wide)
+}// .page-a
+
+
+// parts-a
+// ================================== //
+.parts-a {
+  @include mq(tab) {
+  }// @include mq(tab)
+  @include mq(pc) {
+  }// @include mq(pc)
+  @include mq(wide) {
+  }// @include mq(wide)
+}// .parts-a
+

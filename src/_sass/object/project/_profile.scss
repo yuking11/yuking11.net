@@ -1,0 +1,82 @@
+//=====================================================
+//
+// Profile Style
+//
+// =====================================================
+
+// common
+// ================================== //
+.p-profile {
+
+  margin: $ct_gutter 0 ($ct_gutter * 2);
+
+  .p-profile_img {
+  }// .p-profile_img
+
+  .p-profule_content {
+  }// .p-profule_content
+
+  .p-profile_ttl {
+    margin: 0 0 $ct_gutter;
+  }// .p-profile_ttl
+
+  .p-profile_txt {
+    margin: 0;
+  }// .p-profile_txt
+
+  @include mq(sp, max, true) {
+
+    .p-profile_img {
+      display: block;
+      max-width: 280px;
+      margin: auto;
+    }// .p-profile_img
+
+    .p-profule_content {
+      margin-top: $ct_gutter;
+    }// .p-profule_content
+
+    .p-profile_ttl {
+      text-align: center;
+    }// .p-profile_ttl
+
+    .p-profile_txt {
+      font-size: fs(14);
+      text-align: justify;
+    }// .p-profile_txt
+
+  }// @include mq(sp, max, true)
+  @include mq(tab) {
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-bottom: $ct_gutter * 2;
+
+    .p-profile_img {
+      width: 240px;
+    }// .p-profile_img
+
+    .p-profule_content {
+      max-width: calc(700px - 240px - #{$ct_gutter * 1.5});
+      margin-left: $ct_gutter * 1.5;
+    }// .p-profule_content
+
+    .p-profile_ttl {
+      font-size: fs(20);
+    }// .p-profile_ttl
+
+    .p-profile_txt {
+      font-size: fs(16);
+    }// .p-profile_txt
+
+  }// @include mq(tab)
+  @include mq(pc) {
+
+    margin-bottom: $ct_gutter * 3;
+
+  }// @include mq(pc)
+  @include mq(wide) {
+  }// @include mq(wide)
+}// .p-profile

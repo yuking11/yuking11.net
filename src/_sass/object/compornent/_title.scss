@@ -1,0 +1,89 @@
+//=====================================================
+//
+// Title Style
+//
+// =====================================================
+
+// Primary
+// ================================== //
+.c-ttl-primary {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto ($ct_gutter * 1.5);
+  font-size: fs(24);
+  line-height: 1.2;
+  text-align: center;
+  @include lts(120);
+
+  &::before, &::after {
+    content: "";
+    width: 32px;
+    height: 1px;
+    background-color: $font_color;
+  }// &::before, &::after;
+
+  &::before {
+    margin-right: $ct_gutter;
+  }// &::before;
+  &::after {
+    margin-left: $ct_gutter;
+  }// &::after;
+
+  @include mq(tab) {
+
+    font-size: fs(30);
+    margin-bottom: $ct_gutter * 2;
+
+    &::before, &::after {
+      width: 40px;
+    }// &::before, &::after;
+
+  }// @include mq(tab)
+  @include mq(pc) {
+
+    font-size: fs(42);
+    margin-bottom: $ct_gutter * 3;
+
+  }// @include mq(pc)
+  @include mq(wide) {
+  }// @include mq(wide)
+}// .c-ttl-primary
+
+// Secondary
+// ================================== //
+.c-ttl-secondary {
+
+  margin: 0 0 ($ct_gutter * 1.25);
+  font-size: fs(20);
+  line-height: 1.2;
+  text-align: center;
+  @include lts(80);
+
+  @include mq(tab) {
+
+    font-size: fs(24);
+    margin-bottom: $ct_gutter * 1.5;
+
+  }// @include mq(tab)
+  @include mq(pc) {
+
+    font-size: fs(32);
+    margin-bottom: $ct_gutter * 1.75;
+
+  }// @include mq(pc)
+  @include mq(wide) {
+  }// @include mq(wide)
+}// .c-ttl-secondary
+
+// Tertiary
+// ================================== //
+.c-ttl-tertiary {
+  @include mq(tab) {
+  }// @include mq(tab)
+  @include mq(pc) {
+  }// @include mq(pc)
+  @include mq(wide) {
+  }// @include mq(wide)
+}// .c-ttl-tertiary

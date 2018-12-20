@@ -1,0 +1,186 @@
+//=====================================================
+//
+// Post Style
+//
+// =====================================================
+
+// common
+// ================================== //
+.p-post {
+  @include mq(sp, max, true) {
+  }// @include mq(sp, max, true)
+  @include mq(tab) {
+  }// @include mq(tab)
+  @include mq(pc) {
+  }// @include mq(pc)
+  @include mq(wide) {
+  }// @include mq(wide)
+}// .p-post
+
+// list
+// ================================== //
+.p-post_list {
+
+  .p-post_item {
+    padding-bottom: $ct_gutter;
+    box-shadow: 0 1px 2px 2px rgba(#666, .15);
+    transition: all .35s;
+    &:hover {
+      box-shadow: 0 1px 2px 2px rgba(#666, .35);
+      .p-post_summary {
+        top: 0;
+      }// .p-post_summary
+    }// &:hover;
+  }// .p-post_item
+
+  .p-post_head {
+    position: relative;
+    overflow: hidden;
+  }// .p-post_head
+
+  .p-post_summary {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: rgba(#000, .65);
+    width: 100%;
+    height: 100%;
+    padding: $ct_gutter;
+    color: #FFF;
+    transition: all .35s;
+    .p-post_summary_ttl {
+      font-size: fs(16);
+    }// .p-post_summary_ttl
+    .p-post_summary_txt {
+      font-size: fs(14);
+    }// .p-post_summary_txt
+  }// .p-post_summary
+
+  .p-post_ttl {
+    margin: 0 0 $ct_gutter_half;
+    padding: $ct_gutter_half $ct_gutter 0;
+    font-size: fs(16);
+  }// .p-post_ttl
+
+  .p-post_url {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin: 0 0 $ct_gutter_half;
+    padding: 0 $ct_gutter;
+    .p-post_link {
+      text-decoration: none;
+    }// .p-post_link
+    .p-post_icon {
+      margin-top: 4px;
+      margin-right: $ct_gutter_half;
+      font-size: fs(16);
+    }// .p-post_icon
+  }// .p-post_url
+
+  .p-post_tags {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: 0;
+    padding: 0 $ct_gutter 0 ($ct_gutter * 2.5);
+    list-style: none;
+    color: $font_color_light;
+    font-size: fs(14);
+    &::before {
+      content: "\F00A";
+      position: absolute;
+      top: 0;
+      left: $ct_gutter;
+      font-family: "icon";
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      text-transform: none;
+      speak: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-size: fs(16);
+      margin-right: $ct_gutter_half;
+    }// &::before;
+    .p-post_tag {
+      margin-right: $ct_gutter_half;
+    }// .p-post_tag
+  }// .p-post_tags
+
+  @include mq(sp, max, true) {
+
+    .p-post_item {
+      + .p-post_item {
+        margin-top: $ct_gutter * 2;
+      }// + .p-post_item
+    }// .p-post_item
+
+    .p-post_summary {
+      padding: $ct_gutter;
+    }// .p-post_summary
+
+  }// @include mq(sp, max, true)
+  @include mq(tab) {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: -1%;
+
+    .p-post_item {
+      width: 46%;
+      margin: 2%;
+    }// .p-post_item
+
+    .p-post_summary {
+      padding: $ct_gutter * 1.5;
+    }// .p-post_summary
+
+    .p-post_ttl {
+      font-size: fs(16);
+    }// .p-post_ttl
+
+    .p-post_url {
+      .p-post_icon {
+        margin-right: $ct_gutter * .75;
+      }// .p-post_icon
+    }// .p-post_url
+
+  }// @include mq(tab)
+  @include mq(pc) {
+
+    .p-post_item {
+      width: calc(94% / 3);
+      margin: 1%;
+    }// .p-post_item
+
+    .p-post_summary {
+      padding: $ct_gutter * 1.5;
+      .p-post_summary_ttl {
+      }// .p-post_summary_ttl
+      .p-post_summary_txt {
+      }// .p-post_summary_txt
+    }// .p-post_summary
+
+    .p-post_ttl {
+      padding: $ct_gutter ($ct_gutter * 1.5) 0;
+    }// .p-post_ttl
+
+    .p-post_tags {
+      padding: 0 ($ct_gutter * 1.5) 0 ($ct_gutter * 3);
+      &::before {
+        left: ($ct_gutter * 1.5);
+      }// &::before;
+    }// .p-post_tags
+
+    .p-post_url {
+      padding: 0 ($ct_gutter * 1.5);
+    }// .p-post_url
+
+  }// @include mq(pc)
+  @include mq(wide) {
+  }// @include mq(wide)
+}// .p-post_list

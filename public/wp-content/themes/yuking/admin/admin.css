@@ -1,0 +1,17 @@
+@charset 'UTF-8';
+/*
+ * 管理画面用CSS
+ */
+
+/*
+ * under 782px
+ */
+@media screen and (max-width: 782px) {
+}
+
+
+/*
+ * over 783px
+ */
+@media screen and (min-width: 783px) {
+}

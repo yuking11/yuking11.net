@@ -1,0 +1,79 @@
+// =====================================================
+//
+// 色設定
+//
+// =====================================================
+
+// サイトのベースカラー
+// ================================== //
+
+// body background value
+$body_bg_value: #FFF;
+
+// main color (base color)
+$main_color: #3E75E1;
+
+// sub color
+$sub_color: #C5F4FF;
+
+// accent color
+$accent_color: #D2CBBB;
+
+// base text color
+$font_color: #333;
+$font_color_light: #666;
+$font_color_exlight: #999;
+$font_color_splight: #CCC;
+$font_color_dark: #000;
+
+
+// Link
+// ================================== //
+
+// base link color
+$link_color_primary: #00C;
+$link_color_hover: #F60;
+$link_color_active: #00F;
+$link_color_visited: #551A8B;
+$link_bg_color: #FFF0D9;
+
+$link_color_secondary: $accent_color;
+$link_color_tertiary: #0064FF;
+
+
+// Button
+// ================================== //
+
+$btn_bg_color_default: #FBFBFB;
+$btn_bdr_color_default: #D4D4D4;
+$btn_txt_color_default: #333;
+
+$btn_bg_color_caution: #EB6855;
+$btn_bdr_color_caution: #C22D18;
+$btn_txt_color_caution: #FFF;
+
+$btn_bg_color_primary: #F90;
+$btn_bdr_color_primary: #F60;
+$btn_txt_color_primary: #FFF;
+
+$btn_bg_color_secondary: #3E75E1;
+$btn_bdr_color_secondary: #2F57A6;
+$btn_txt_color_secondary: #FFF;
+
+$btn_bg_color_tertiary: #1CB841;
+$btn_bdr_color_tertiary: #15812F;
+$btn_txt_color_tertiary: #FFF;
+
+$btn_bg_color_black: #333;
+$btn_bdr_color_black: #000;
+$btn_txt_color_black: #FFF;
+
+
+// form カラー
+// ================================== //
+
+// チェックボックス＆ラジオボタン
+$ui_input_bdr_color: #555;
+$ui_input_bg_color: #FFF;
+$ui_input_txt_color: $font_color;
+$ui_input_checked_color: $main_color;

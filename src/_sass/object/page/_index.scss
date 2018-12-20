@@ -1,0 +1,69 @@
+// =====================================================
+//
+// TOPページ Style
+// - 共通
+// - parts-a
+//
+// =====================================================
+
+// 共通
+// ================================== //
+#top_page {
+  @include mq(sp, max, true) {
+    margin: 10px;
+  }// @include mq(sp, max, true)
+  @include mq(tab) {
+    margin: 20px;
+  }
+  @include mq(pc) {
+    margin: 30px;
+  }
+  @include mq(wide) {
+    margin: 40px;
+  }
+}// #top_page
+
+// parts-a
+// ================================== //
+.test {
+  @include mq(sp, max, true) {
+    padding: 10px;
+  }// @include mq(sp, max, true)
+  @include mq(tab) {
+    padding: 20px;
+  }// @include mq(tab)
+  @include mq(pc) {
+    padding: 30px;
+  }// @include mq(pc)
+  @include mq(wide) {
+    padding: 40px;
+  }// @include mq(wide)
+
+  .test-inner {
+    @include mq(sp, max, true) {
+      margin: 10px;
+    }// @include mq(sp, max, true)
+    @include mq(tab) {
+      margin: 20px;
+    }// @include mq(tab)
+    @include mq(pc) {
+      margin: 30px;
+    }// @include mq(pc)
+    @include mq(wide) {
+      margin: 40px;
+    }// @include mq(wide)
+  }// .test-inner
+
+  .nest {
+    .nest_child {
+      width: 100px;
+      @at-root #{selector-replace(&, ".nest_child", ".nest-1")} {
+        width: 900px;
+      }
+      @include replace('.nest_child', '.nest-2') {
+        width: 500px;
+      }
+    }// .nest_child
+  }// .nest
+
+}// .test

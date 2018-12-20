@@ -1,0 +1,18 @@
+//=====================================================
+//
+// Page Common Style
+//
+// =====================================================
+
+// Section
+// ================================== //
+.section {
+  @include mq(sp, max, true) {
+  }// @include mq(sp, max, true)
+  @include mq(tab) {
+  }// @include mq(tab)
+  @include mq(pc) {
+  }// @include mq(pc)
+  @include mq(wide) {
+  }// @include mq(wide)
+}// .section

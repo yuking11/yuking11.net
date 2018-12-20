@@ -1,0 +1,148 @@
+// =====================================================
+//
+// container Style
+//
+// =====================================================
+
+// container
+// ================================== //
+.l-container {
+  @include mq(sp, max, true) {
+  }// @include mq(sp, max, true)
+  @include mq(tab) {
+  }// @include mq(tab)
+  @include mq(pc) {
+  }// @include mq(pc)
+  @include mq(wide) {
+  }// @include mq(wide)
+}// .l-container
+
+
+// wrapper
+// ================================== //
+.l-wrap {
+  @include mq(sp, max, true) {
+  }// @include mq(sp, max, true)
+  @include mq(tab) {
+  }// @include mq(tab)
+  @include mq(pc) {
+  }// @include mq(pc)
+  @include mq(wide) {
+  }// @include mq(wide)
+}// .l-wrap
+
+
+// inner
+// ================================== //
+.l-inner {
+
+  width: 100%;
+  max-width: calc(#{$site_width} + (#{$ct_gutter} * 2));
+  margin: 0 auto;
+  padding-right: $ct_gutter;
+  padding-left: $ct_gutter;
+
+  @include mq(sp, max, true) {
+  }// @include mq(sp, max, true)
+  @include mq(tab) {
+  }// @include mq(tab)
+  @include mq(pc) {
+  }// @include mq(pc)
+  @include mq(wide) {
+  }// @include mq(wide)
+}// .l-inner
+
+
+// content
+// ================================== //
+.l-content {
+
+  padding-right: $ct_gutter * 2;
+  padding-left: $ct_gutter * 2;
+
+  .l-inner {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }// .l-inner
+
+  @include mq(sp, max, true) {
+
+    padding-right: $ct_gutter;
+    padding-left: $ct_gutter;
+
+  }// @include mq(sp, max, true)
+  @include mq(tab) {
+  }// @include mq(tab)
+  @include mq(pc) {
+  }// @include mq(pc)
+  @include mq(wide) {
+  }// @include mq(wide)
+
+  // 内包1カラム
+  &-wide {
+
+    padding-right: $ct_gutter * 2;
+    padding-left: $ct_gutter * 2;
+
+    @include mq(sp, max, true) {
+
+      padding-right: $ct_gutter;
+      padding-left: $ct_gutter;
+
+    }// @include mq(sp, max, true)
+    @include mq(tab) {
+    }// @include mq(tab)
+    @include mq(pc) {
+    }// @include mq(pc)
+    @include mq(wide) {
+    }// @include mq(wide)
+  }// &-wide
+
+}// .l-content
+
+
+// section
+// ================================== //
+.l-section {
+
+  padding: ($ct_gutter * 1.5) 0;
+
+  &:not(:last-of-type) {
+    margin-bottom: $ct_gutter * 1.5;
+  }// &:not(:last-of-type);
+
+  &-top {
+    margin-bottom: $ct_gutter * 1.5;
+    padding: ($ct_gutter * 1.5) 0;
+    &:first-of-type {
+      margin-top: $ct_gutter * 1.5;
+    }// &:first-of-type;
+  }// &-top
+
+  @include mq(sp, max, true) {
+  }// @include mq(sp, max, true)
+  @include mq(tab) {
+
+    padding: ($ct_gutter * 2) 0;
+
+
+    &:not(:last-of-type) {
+      margin-bottom: $ct_gutter * 2;
+    }// &:not(:last-of-type);
+
+    &-top {
+      margin-bottom: $ct_gutter * 2;
+      padding: ($ct_gutter * 2) 0;
+      &:first-of-type {
+        margin-top: $ct_gutter * 2;
+      }// &:first-of-type;
+    }// &-top
+
+  }// @include mq(tab)
+  @include mq(pc) {
+  }// @include mq(pc)
+  @include mq(wide) {
+  }// @include mq(wide)
+}// .l-section

@@ -1,0 +1,185 @@
+// =====================================================
+//
+// nav Style
+//
+// =====================================================
+
+// Gnavi
+// ================================== //
+.l-nav {
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1200;
+
+  @include mq(sp, max, true) {
+  }// @include mq(sp, max, true)
+  @include mq(tab) {
+  }// @include mq(tab)
+  @include mq(pc) {
+    display: none;
+  }// @include mq(pc)
+}// .l-nav
+
+// nav toggle
+// ================================== //
+// コントローラー
+#gnav_ctrl {
+
+  display: none;
+
+  &:checked {
+    ~ .gnav_btn {
+      border-color: $font_color;
+      &::before {
+        border-top-color: $font_color;
+        transform: rotate(45deg);
+      }// &::before
+      &::after {
+        border-top-color: $font_color;
+        transform: rotate(-45deg);
+      }// &::after
+      .gnav_btn_inner {
+        opacity: 0;
+      }// .gnav_btn_inner
+    }// ~ .gnav_btn
+    ~ .gnav {
+      right: 0;
+      transition-delay: .2s;
+    }// ~ .gnav
+    ~ .gnav_bg {
+      right: 0;
+      transition-delay: 0;
+    }// ~ .gnav_bg
+  }// &:checked
+
+  @include mq(sp, max, true) {
+  }// @include mq(sp, max, true)
+  @include mq(pc) {
+  }// @include mq(pc)
+}// #gnav_ctrl
+
+// button
+.gnav_btn {
+
+  position: fixed;
+  top: ($header_height_sp - 32) / 2;
+  right: $ct_gutter;
+  z-index: 1600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #FFF;
+  border-radius: 4px;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 18px;
+    height: 0;
+    margin: auto;
+    border-top: 2px solid #FFF;
+    transition: all .35s ease-out;
+  }// &::before,&::after
+
+  .gnav_btn_inner {
+    width: 18px;
+    height: 10px;
+    border-top: 2px solid #FFF;
+    border-bottom: 2px solid #FFF;
+    transition: all .35s ease-out;
+  }// .gnav_btn_inner
+
+  @include mq(sp, max, true) {
+  }// @include mq(sp, max, true)
+  @include mq(tab) {
+    top: ($header_height_pc - 32) / 2;
+  }// @include mq(tab)
+  @include mq(pc) {
+  }// @include mq(pc)
+}// .gnav_btn
+
+// bg
+.gnav_bg {
+
+  position: absolute;
+  top: -20px;
+  right: -150vw;
+  z-index: 900;
+  display: block;
+  background-color: rgba(#000, .65);
+  width: 150vw;
+  height: 120vh;
+  cursor: pointer;
+  transition: all .5s;
+
+  @include mq(sp, max, true) {
+  }// @include mq(sp, max, true)
+  @include mq(tab) {
+  }// @include mq(tab)
+  @include mq(pc) {
+  }// @include mq(pc)
+}// .gnav_bg
+
+
+// gnav
+// ================================== //
+.gnav {
+
+  position: absolute;
+  top: 0;
+  right: -80vw;
+  z-index: 1000;
+  width: 80vw;
+  height: 96vh;
+  padding: 0;
+  overflow-y: scroll;
+  background-color: #FFF;
+  transition: all .35s;
+  transition-delay: 0;
+
+  .gnav_list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid #CCC;
+    .gnav_item {
+      border-bottom: 1px solid #CCC;
+    }// .gnav_item
+    .gnav_link {
+      display: block;
+      padding: $ct_gutter_half $ct_gutter;
+      color: $font_color;
+      font-size: fs(14);
+      text-decoration: none;
+      transition: all .35s;
+      &:hover,
+      &.is-hover {
+        background-color: #EEE;
+      }// &:hover, &.is-hover
+    }// .gnav_link
+  }// .gnav_list
+
+  @include mq(sp, max, true) {
+  }// @include mq(sp, max, true)
+  @include mq(tab) {
+
+    .gnav_list {
+      .gnav_link {
+        padding: $ct_gutter;
+        font-size: fs(16);
+      }// .gnav_link
+    }// .gnav_list
+
+  }// @include mq(tab)
+  @include mq(pc) {
+  }// @include mq(pc)
+}// .gnav

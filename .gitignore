@@ -1,0 +1,72 @@
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# adobe
+_notes
+
+# Sublime
+sftp-config.json
+*.sublime-project
+*.sublime-workspace
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+### Linux ###
+.*
+!.gitignore
+!.htaccess
+!.htpasswd
+!.editorconfig
+!.babelrc
+*~
+
+### Ruby ###
+*.gem
+*.rbc
+.bundle
+.config
+coverage
+InstalledFiles
+lib/bundler/man
+pkg
+rdoc
+spec/reports
+test/tmp
+test/version_tmp
+tmp
+/**/Movefile
+
+# YARD artifacts
+.yardoc
+_yardocp
+doc/
+
+# node
+node_modules/
+
+# sass
+_sass-cache/
+sass-cache/
+
+# files
+_items/
+
+# Wordpress
+*.log
+
+public/*
+!public/favicon.ico
+!public/google*.html
+!public/wp-content
+public/wp-content/*
+!public/wp-content/themes
+public/wp-content/themes/*
+!public/wp-content/themes/yuking

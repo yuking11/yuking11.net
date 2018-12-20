@@ -1,0 +1,59 @@
+// =====================================================
+//
+// Footer Style
+//
+// =====================================================
+
+// footer
+// ================================== //
+.l-footer {
+
+  background-color: #000;
+  color: #FFF;
+  margin: ($ct_gutter * 3) 0 0;
+  padding: $ct_gutter 0 0;
+
+  .c-ttl-primary {
+    &::before, &::after {
+      background-color: #FFF;
+    }// &::before, &::after;
+  }// .c-ttl-primary
+
+  .copyright {
+    border-top: 1px solid #666;
+    margin: ($ct_gutter * 1.5) 0 0;
+    padding: $ct_gutter_half 0;
+    text-align: center;
+    small {
+      font-size: fs(12);
+      line-height: 1;
+    }// small
+  }// .copyright
+
+  @include mq(sp, max, true) {
+
+    margin-top: $ct_gutter * 4;
+
+  }// @include mq(sp, max, true)
+  @include mq(tab) {
+
+    margin-top: $ct_gutter * 6;
+    padding-top: $ct_gutter * 1.5;
+
+    .copyright {
+      margin-top: $ct_gutter * 3;
+      padding: $ct_gutter 0;
+      small {
+        font-size: fs(14);
+      }// small
+    }// .copyright
+
+  }// @include mq(tab)
+  @include mq(pc) {
+
+    padding-top: $ct_gutter * 2;
+
+  }// @include mq(pc)
+  @include mq(wide) {
+  }// @include mq(wide)
+}// .l-footer
