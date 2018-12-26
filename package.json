@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "フロントエンド制作・開発用パッケージ",
   "main": "index.js",
+  "licence": "No License",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx gulp webpackProd",
