@@ -10,6 +10,7 @@
        url( "<%= fontPath %><%= fontName %>.svg#<%= fontName %>?c=<%= timeStamp %>" ) format( "svg" );
   font-weight: normal;
   font-style: normal;
+  font-display: block;
 }
 
 [class^="<%= className %>-"], [class*=" <%= className %>-"] {
