@@ -34,6 +34,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 // <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet">
 
 ?>
+<link rel="preload" href="<https://fonts.googleapis.com/css?family=M+PLUS+1p:400,700|Nunito:400,600,700" as="style">
 <link href="https://fonts.googleapis.com/css?family=M+PLUS+1p:400,700|Nunito:400,600,700" rel="stylesheet">
 <?php
   $css_timestamp = getTimeStamp( '/assets/css/app.css' );
@@ -44,6 +45,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     $css_file = '/assets/css/app.css?' . $css_timestamp;
   }
 ?>
+<link rel="preload" href="<?php echo esc_url( get_template_directory_uri() . $css_file ); ?>" as="style">
+<link rel="preload" href="<?php echo esc_url( get_template_directory_uri() ); ?>/style.css" as="style">
 <link href="<?php echo esc_url( get_template_directory_uri() . $css_file ); ?>" rel="stylesheet" media="all">
 <link href="<?php echo esc_url( get_template_directory_uri() ); ?>/style.css" rel="stylesheet" media="all">
 <?php

@@ -51,7 +51,7 @@
     $js_file = '/assets/js/app.js?' . $js_timestamp;
   }
 ?>
-<script src="<?php echo esc_url( get_template_directory_uri() . $js_file ); ?>"></script>
+<script defer src="<?php echo esc_url( get_template_directory_uri() . $js_file ); ?>"></script>
 <?php
   wp_footer();
 ?>
