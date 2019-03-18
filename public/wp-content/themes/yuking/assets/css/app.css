@@ -346,7 +346,7 @@ html {
 body {
   background: #FFF;
   color: #333;
-  font-family: "Nunito", "M PLUS 1p", "Helvetica Neue", "\30D2\30E9\30AE\30CE\89D2\30B4   ProN W3", Hiragino Kaku Gothic ProN, Arial, Meiryo, sans-serif;
+  font-family: "Nunito", "M PLUS 1p", "Helvetica Neue", "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, Meiryo, sans-serif;
   line-height: 1.6;
   word-wrap: break-all;
   word-break: break-all; }
@@ -1479,22 +1479,22 @@ code {
       left: 0;
       display: inline-block; }
     .c-skill .c-skill_desc::before {
-      content: "\2605\2605\2605\2605\2605";
+      content: "★★★★★";
       z-index: 100;
       color: #CCC; }
     .c-skill .c-skill_desc::after {
       z-index: 110;
       color: #000; }
     .c-skill .c-skill_desc-1::after {
-      content: "\2605"; }
+      content: "★"; }
     .c-skill .c-skill_desc-2::after {
-      content: "\2605\2605"; }
+      content: "★★"; }
     .c-skill .c-skill_desc-3::after {
-      content: "\2605\2605\2605"; }
+      content: "★★★"; }
     .c-skill .c-skill_desc-4::after {
-      content: "\2605\2605\2605\2605"; }
+      content: "★★★★"; }
     .c-skill .c-skill_desc-5::after {
-      content: "\2605\2605\2605\2605\2605"; }
+      content: "★★★★★"; }
     .c-skill .c-skill_desc .p-skill_txt {
       display: block;
       overflow: hidden;

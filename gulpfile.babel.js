@@ -2,7 +2,7 @@
 /**
  * gulp-config
  */
-require('babel-register');
+require('@babel/register');
 import gulp from 'gulp';
 /**
  * site config

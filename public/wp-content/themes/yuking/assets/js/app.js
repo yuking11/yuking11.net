@@ -1988,11 +1988,11 @@ process.umask = function() { return 0; };
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/*! @preserve sweet-scroll v3.0.1 - tsuyoshiwada | MIT License */
+/*! @preserve sweet-scroll v4.0.0 - tsuyoshiwada | MIT License */
 (function (global, factory) {
      true ? module.exports = factory() :
     undefined;
-}(this, (function () { 'use strict';
+}(this, function () { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -2009,12 +2009,15 @@ process.umask = function() { return 0; };
     and limitations under the License.
     ***************************************************************************** */
 
-    var __assign = Object.assign || function __assign(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-        }
-        return t;
+    var __assign = function() {
+        __assign = Object.assign || function __assign(t) {
+            for (var s, i = 1, n = arguments.length; i < n; i++) {
+                s = arguments[i];
+                for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+            }
+            return t;
+        };
+        return __assign.apply(this, arguments);
     };
 
     // @link https://github.com/JedWatson/exenv/blob/master/index.js
@@ -2023,9 +2026,7 @@ process.umask = function() { return 0; };
         window.document.createElement);
     var canUseHistory = !canUseDOM
         ? false
-        : (window.history &&
-            'pushState' in window.history &&
-            window.location.protocol !== 'file:');
+        : window.history && 'pushState' in window.history && window.location.protocol !== 'file:';
     var canUsePassiveOption = (function () {
         var support = false;
         if (!canUseDOM) {
@@ -2033,11 +2034,14 @@ process.umask = function() { return 0; };
         }
         /* tslint:disable:no-empty */
         try {
-            window.addEventListener('test', null, Object.defineProperty({}, 'passive', {
+            var win = window;
+            var opts = Object.defineProperty({}, 'passive', {
                 get: function () {
                     support = true;
                 },
-            }));
+            });
+            win.addEventListener('test', null, opts);
+            win.removeEventListener('test', null, opts);
         }
         catch (e) { }
         /* tslint:enable */
@@ -2047,87 +2051,75 @@ process.umask = function() { return 0; };
     var isString = function (obj) { return typeof obj === 'string'; };
     var isFunction = function (obj) { return typeof obj === 'function'; };
     var isArray = function (obj) { return Array.isArray(obj); };
-    var isNumeric = function (obj) { return !isArray(obj) && ((obj - parseFloat(obj)) + 1) >= 0; };
-    var isElement = function (obj) { return obj instanceof Element; };
-    var hasProp = function (obj, key) { return (obj && obj.hasOwnProperty(key)); };
+    var isNumeric = function (obj) { return !isArray(obj) && obj - parseFloat(obj) + 1 >= 0; };
+    var hasProp = function (obj, key) { return obj && obj.hasOwnProperty(key); };
 
-    var raf = canUseDOM ? window.requestAnimationFrame.bind(window) : null;
-    var caf = canUseDOM ? window.cancelAnimationFrame.bind(window) : null;
+    var raf = canUseDOM
+        ? window.requestAnimationFrame.bind(window)
+        : null;
+    var caf = canUseDOM
+        ? window.cancelAnimationFrame.bind(window)
+        : null;
 
     /* tslint:disable:curly */
     /* tslint:disable:no-conditional-assignment */
     var cos = Math.cos, sin = Math.sin, pow = Math.pow, sqrt = Math.sqrt, PI = Math.PI;
     var easings = {
         linear: function (p) { return p; },
-        easeInQuad: function (_, t, b, c, d) { return (c * (t /= d) * t + b); },
-        easeOutQuad: function (_, t, b, c, d) { return (-c * (t /= d) * (t - 2) + b); },
-        easeInOutQuad: function (_, t, b, c, d) { return ((t /= d / 2) < 1 ? c / 2 * t * t + b : -c / 2 * ((--t) * (t - 2) - 1) + b); },
-        easeInCubic: function (_, t, b, c, d) { return (c * (t /= d) * t * t + b); },
-        easeOutCubic: function (_, t, b, c, d) { return (c * ((t = t / d - 1) * t * t + 1) + b); },
-        easeInOutCubic: function (_, t, b, c, d) { return ((t /= d / 2) < 1 ? c / 2 * t * t * t + b : c / 2 * ((t -= 2) * t * t + 2) + b); },
-        easeInQuart: function (_, t, b, c, d) { return (c * (t /= d) * t * t * t + b); },
-        easeOutQuart: function (_, t, b, c, d) { return (-c * ((t = t / d - 1) * t * t * t - 1) + b); },
-        easeInOutQuart: function (_, t, b, c, d) { return ((t /= d / 2) < 1 ? c / 2 * t * t * t * t + b : -c / 2 * ((t -= 2) * t * t * t - 2) + b); },
-        easeInQuint: function (_, t, b, c, d) { return (c * (t /= d) * t * t * t * t + b); },
-        easeOutQuint: function (_, t, b, c, d) { return (c * ((t = t / d - 1) * t * t * t * t + 1) + b); },
-        easeInOutQuint: function (_, t, b, c, d) { return ((t /= d / 2) < 1 ? c / 2 * t * t * t * t * t + b : c / 2 * ((t -= 2) * t * t * t * t + 2) + b); },
-        easeInSine: function (_, t, b, c, d) { return (-c * cos(t / d * (PI / 2)) + c + b); },
-        easeOutSine: function (_, t, b, c, d) { return (c * sin(t / d * (PI / 2)) + b); },
-        easeInOutSine: function (_, t, b, c, d) { return (-c / 2 * (cos(PI * t / d) - 1) + b); },
-        easeInExpo: function (_, t, b, c, d) { return ((t === 0) ? b : c * pow(2, 10 * (t / d - 1)) + b); },
-        easeOutExpo: function (_, t, b, c, d) { return ((t === d) ? b + c : c * (-pow(2, -10 * t / d) + 1) + b); },
+        easeInQuad: function (_, t, b, c, d) { return c * (t /= d) * t + b; },
+        easeOutQuad: function (_, t, b, c, d) { return -c * (t /= d) * (t - 2) + b; },
+        easeInOutQuad: function (_, t, b, c, d) {
+            return (t /= d / 2) < 1 ? (c / 2) * t * t + b : (-c / 2) * (--t * (t - 2) - 1) + b;
+        },
+        easeInCubic: function (_, t, b, c, d) { return c * (t /= d) * t * t + b; },
+        easeOutCubic: function (_, t, b, c, d) { return c * ((t = t / d - 1) * t * t + 1) + b; },
+        easeInOutCubic: function (_, t, b, c, d) {
+            return (t /= d / 2) < 1 ? (c / 2) * t * t * t + b : (c / 2) * ((t -= 2) * t * t + 2) + b;
+        },
+        easeInQuart: function (_, t, b, c, d) { return c * (t /= d) * t * t * t + b; },
+        easeOutQuart: function (_, t, b, c, d) { return -c * ((t = t / d - 1) * t * t * t - 1) + b; },
+        easeInOutQuart: function (_, t, b, c, d) {
+            return (t /= d / 2) < 1 ? (c / 2) * t * t * t * t + b : (-c / 2) * ((t -= 2) * t * t * t - 2) + b;
+        },
+        easeInQuint: function (_, t, b, c, d) { return c * (t /= d) * t * t * t * t + b; },
+        easeOutQuint: function (_, t, b, c, d) { return c * ((t = t / d - 1) * t * t * t * t + 1) + b; },
+        easeInOutQuint: function (_, t, b, c, d) {
+            return (t /= d / 2) < 1
+                ? (c / 2) * t * t * t * t * t + b
+                : (c / 2) * ((t -= 2) * t * t * t * t + 2) + b;
+        },
+        easeInSine: function (_, t, b, c, d) { return -c * cos((t / d) * (PI / 2)) + c + b; },
+        easeOutSine: function (_, t, b, c, d) { return c * sin((t / d) * (PI / 2)) + b; },
+        easeInOutSine: function (_, t, b, c, d) { return (-c / 2) * (cos((PI * t) / d) - 1) + b; },
+        easeInExpo: function (_, t, b, c, d) { return (t === 0 ? b : c * pow(2, 10 * (t / d - 1)) + b); },
+        easeOutExpo: function (_, t, b, c, d) { return (t === d ? b + c : c * (-pow(2, (-10 * t) / d) + 1) + b); },
         easeInOutExpo: function (_, t, b, c, d) {
             if (t === 0)
                 return b;
             if (t === d)
                 return b + c;
             if ((t /= d / 2) < 1)
-                return c / 2 * pow(2, 10 * (t - 1)) + b;
-            return c / 2 * (-pow(2, -10 * --t) + 2) + b;
+                return (c / 2) * pow(2, 10 * (t - 1)) + b;
+            return (c / 2) * (-pow(2, -10 * --t) + 2) + b;
         },
-        easeInCirc: function (_, t, b, c, d) { return (-c * (sqrt(1 - (t /= d) * t) - 1) + b); },
-        easeOutCirc: function (_, t, b, c, d) { return (c * sqrt(1 - (t = t / d - 1) * t) + b); },
-        easeInOutCirc: function (_, t, b, c, d) { return ((t /= d / 2) < 1 ? -c / 2 * (sqrt(1 - t * t) - 1) + b : c / 2 * (sqrt(1 - (t -= 2) * t) + 1) + b); },
+        easeInCirc: function (_, t, b, c, d) { return -c * (sqrt(1 - (t /= d) * t) - 1) + b; },
+        easeOutCirc: function (_, t, b, c, d) { return c * sqrt(1 - (t = t / d - 1) * t) + b; },
+        easeInOutCirc: function (_, t, b, c, d) {
+            return (t /= d / 2) < 1
+                ? (-c / 2) * (sqrt(1 - t * t) - 1) + b
+                : (c / 2) * (sqrt(1 - (t -= 2) * t) + 1) + b;
+        },
     };
 
-    var directionMethodMap = {
-        y: 'scrollTop',
-        x: 'scrollLeft',
+    var $$ = function (selector) {
+        return Array.prototype.slice.call((!selector ? [] : document.querySelectorAll(selector)));
     };
-    var directionPropMap = {
-        y: 'pageYOffset',
-        x: 'pageXOffset',
+    var $ = function (selector) { return $$(selector).shift() || null; };
+    var isElement = function (obj) { return obj instanceof Element; };
+    var isWindow = function ($el) { return $el === window; };
+    var isRootContainer = function ($el) {
+        return $el === document.documentElement || $el === document.body;
     };
-    var getScroll = function ($el, direction) { return ($el[directionMethodMap[direction]]); };
-    var setScroll = function ($el, offset, direction) {
-        $el[directionMethodMap[direction]] = offset;
-    };
-    var getOffset = function ($el, $context) {
-        var rect = $el.getBoundingClientRect();
-        if (rect.width || rect.height) {
-            var scroll_1 = { top: 0, left: 0 };
-            var $ctx = void 0;
-            if (isRootContainer($context)) {
-                $ctx = document.documentElement;
-                scroll_1.top = window[directionPropMap.y];
-                scroll_1.left = window[directionPropMap.x];
-            }
-            else {
-                $ctx = $context;
-                var cRect = $ctx.getBoundingClientRect();
-                scroll_1.top = (cRect.top * -1) + $ctx[directionMethodMap.y];
-                scroll_1.left = (cRect.left * -1) + $ctx[directionMethodMap.x];
-            }
-            return {
-                top: (rect.top + scroll_1.top) - $ctx.clientTop,
-                left: (rect.left + scroll_1.left) - $ctx.clientLeft,
-            };
-        }
-        return rect;
-    };
-
-    var $$ = function (selector) { return (Array.prototype.slice.call((!selector ? [] : document.querySelectorAll(selector)))); };
-    var $ = function (selector) { return ($$(selector).shift() || null); };
     var matches = function ($el, selector) {
         if (isElement(selector)) {
             return $el === selector;
@@ -2138,45 +2130,19 @@ process.umask = function() { return 0; };
         while (--i >= 0 && results[i] !== $el) { }
         return i > -1;
     };
-    var isRootContainer = function ($el) { return ($el === document.documentElement || $el === document.body); };
-    var findScrollable = function (selectors, direction) {
-        var method = directionMethodMap[direction];
-        var $elements = isElement(selectors) ? [selectors] : $$(selectors);
-        var $div = document.createElement('div');
-        for (var i = 0; i < $elements.length; i += 1) {
-            var $el = $elements[i];
-            var $result = null;
-            if ($el[method] > 0) {
-                $result = $el;
-            }
-            else {
-                var outerWidth_1 = window.outerWidth, innerWidth_1 = window.innerWidth;
-                var zoom = outerWidth_1 ? outerWidth_1 / innerWidth_1 : 1;
-                $div.style.width = $el.clientWidth + 1 + "px";
-                $div.style.height = $el.clientHeight + 1 + "px";
-                $el.appendChild($div);
-                $el[method] = Math.max(1, 1.5 / zoom);
-                if ($el[method] > 0) {
-                    $result = $el;
-                }
-                $el[method] = 0;
-                $el.removeChild($div);
-            }
-            if ($result) {
-                return $result;
-            }
-        }
-        return null;
-    };
 
-    var getHeight = function ($el) { return (Math.max($el.scrollHeight, $el.clientHeight, $el.offsetHeight)); };
-    var getWidth = function ($el) { return (Math.max($el.scrollWidth, $el.clientWidth, $el.offsetWidth)); };
+    var getHeight = function ($el) {
+        return Math.max($el.scrollHeight, $el.clientHeight, $el.offsetHeight);
+    };
+    var getWidth = function ($el) {
+        return Math.max($el.scrollWidth, $el.clientWidth, $el.offsetWidth);
+    };
     var getSize = function ($el) { return ({
         width: getWidth($el),
         height: getHeight($el),
     }); };
     var getViewportAndElementSizes = function ($el) {
-        var isRoot = isRootContainer($el);
+        var isRoot = isWindow($el) || isRootContainer($el);
         return {
             viewport: {
                 width: isRoot
@@ -2193,6 +2159,50 @@ process.umask = function() { return 0; };
         };
     };
 
+    var directionMethodMap = {
+        y: 'scrollTop',
+        x: 'scrollLeft',
+    };
+    var directionPropMap = {
+        y: 'pageYOffset',
+        x: 'pageXOffset',
+    };
+    var getScroll = function ($el, direction) {
+        return isWindow($el) ? $el[directionPropMap[direction]] : $el[directionMethodMap[direction]];
+    };
+    var setScroll = function ($el, offset, direction) {
+        if (isWindow($el)) {
+            var top_1 = direction === 'y';
+            $el.scrollTo(!top_1 ? offset : $el.pageXOffset, top_1 ? offset : $el.pageYOffset);
+        }
+        else {
+            $el[directionMethodMap[direction]] = offset;
+        }
+    };
+    var getOffset = function ($el, $context) {
+        var rect = $el.getBoundingClientRect();
+        if (rect.width || rect.height) {
+            var scroll_1 = { top: 0, left: 0 };
+            var $ctx = void 0;
+            if (isWindow($context) || isRootContainer($context)) {
+                $ctx = document.documentElement;
+                scroll_1.top = window[directionPropMap.y];
+                scroll_1.left = window[directionPropMap.x];
+            }
+            else {
+                $ctx = $context;
+                var cRect = $ctx.getBoundingClientRect();
+                scroll_1.top = cRect.top * -1 + $ctx[directionMethodMap.y];
+                scroll_1.left = cRect.left * -1 + $ctx[directionMethodMap.x];
+            }
+            return {
+                top: rect.top + scroll_1.top - $ctx.clientTop,
+                left: rect.left + scroll_1.left - $ctx.clientLeft,
+            };
+        }
+        return rect;
+    };
+
     var wheelEventName = (function () {
         if (!canUseDOM) {
             return 'wheel';
@@ -2205,12 +2215,8 @@ process.umask = function() { return 0; };
             $el[method](eventName(name), listener, canUsePassiveOption ? { passive: passive } : false);
         });
     };
-    var addEvent = function ($el, event, listener, passive) {
-        apply($el, 'addEventListener', event, listener, passive);
-    };
-    var removeEvent = function ($el, event, listener, passive) {
-        apply($el, 'removeEventListener', event, listener, passive);
-    };
+    var addEvent = function ($el, event, listener, passive) { return apply($el, 'addEventListener', event, listener, passive); };
+    var removeEvent = function ($el, event, listener, passive) { return apply($el, 'removeEventListener', event, listener, passive); };
 
     var reRelativeToken = /^(\+|-)=(\d+(?:\.\d+)?)$/;
     var parseCoordinate = function (coordinate, enableVertical) {
@@ -2278,7 +2284,6 @@ process.umask = function() { return 0; };
         updateURL: false,
         preventDefault: true,
         stopPropagation: true,
-        quickMode: false,
         // Callbacks
         before: null,
         after: null,
@@ -2295,6 +2300,7 @@ process.umask = function() { return 0; };
          */
         function SweetScroll(options, container) {
             var _this = this;
+            this.$el = null;
             this.ctx = {
                 $trigger: null,
                 opts: null,
@@ -2377,6 +2383,7 @@ process.umask = function() { return 0; };
                     else if (horizontal) {
                         _this.toLeft(to, options);
                     }
+                    break;
                 }
             };
             /**
@@ -2393,21 +2400,21 @@ process.umask = function() { return 0; };
                     e.preventDefault();
                 }
             };
-            var opts = __assign({}, defaultOptions, (options || {}));
-            var vertical = opts.vertical, horizontal = opts.horizontal;
-            var selector = container === undefined ? 'body,html' : container;
+            this.opts = __assign({}, defaultOptions, (options || {}));
             var $container = null;
             if (canUseDOM) {
-                if (vertical) {
-                    $container = findScrollable(selector, 'y');
+                if (typeof container === 'string') {
+                    $container = $(container);
                 }
-                if (!$container && horizontal) {
-                    $container = findScrollable(selector, 'x');
+                else if (container != null) {
+                    $container = container;
+                }
+                else {
+                    $container = window;
                 }
             }
+            this.$el = $container;
             if ($container) {
-                this.opts = opts;
-                this.$el = $container;
                 this.bind(true, false);
             }
         }
@@ -2426,10 +2433,11 @@ process.umask = function() { return 0; };
             }
             var _a = this, $el = _a.$el, ctx = _a.ctx, currentOptions = _a.opts;
             var $trigger = ctx.$trigger;
-            var opts = __assign({}, currentOptions, options || {});
+            var opts = __assign({}, currentOptions, (options || {}));
             var optOffset = opts.offset, vertical = opts.vertical, horizontal = opts.horizontal;
             var $header = isElement(opts.header) ? opts.header : $(opts.header);
-            var hash = isString(distance) && /^#/.test(distance) ? distance : null;
+            var reg = /^#/;
+            var hash = isString(distance) && reg.test(distance) ? distance : null;
             ctx.opts = opts; // Temporary options
             ctx.cancel = false; // Disable the call flag of `cancel`
             ctx.hash = hash;
@@ -2492,13 +2500,13 @@ process.umask = function() { return 0; };
          * Scroll animation to specified left position.
          */
         SweetScroll.prototype.toTop = function (distance, options) {
-            this.to(distance, __assign({}, options || {}, { vertical: true, horizontal: false }));
+            this.to(distance, __assign({}, (options || {}), { vertical: true, horizontal: false }));
         };
         /**
          * Scroll animation to specified top position.
          */
         SweetScroll.prototype.toLeft = function (distance, options) {
-            this.to(distance, __assign({}, options || {}, { vertical: false, horizontal: true }));
+            this.to(distance, __assign({}, (options || {}), { vertical: false, horizontal: true }));
         };
         /**
          * Scroll animation to specified element.
@@ -2556,7 +2564,9 @@ process.umask = function() { return 0; };
          * Callback methods.
          */
         /* tslint:disable:no-empty */
-        SweetScroll.prototype.onBefore = function (_, __) { return true; };
+        SweetScroll.prototype.onBefore = function (_, __) {
+            return true;
+        };
         SweetScroll.prototype.onStep = function (_) { };
         SweetScroll.prototype.onAfter = function (_, __) { };
         SweetScroll.prototype.onCancel = function () { };
@@ -2574,20 +2584,10 @@ process.umask = function() { return 0; };
                 : easings[opts.easing];
             // Update start offset.
             var $container = this.$el;
-            var offset = ctx.pos;
             var start = {
                 top: getScroll($container, 'y'),
                 left: getScroll($container, 'x'),
             };
-            if (opts.quickMode) {
-                var _a = getViewportAndElementSizes($container).viewport, width = _a.width, height = _a.height;
-                if (Math.abs(start.top - offset.top) > height) {
-                    start.top = start.top > offset.top ? offset.top + height : offset.top - height;
-                }
-                if (Math.abs(start.left - offset.left) > width) {
-                    start.left = start.left > offset.left ? offset.left + width : offset.left - width;
-                }
-            }
             ctx.startPos = start;
             // Loop
             ctx.id = SweetScroll.raf(this.loop);
@@ -2626,6 +2626,7 @@ process.umask = function() { return 0; };
             for (var _i = 2; _i < arguments.length; _i++) {
                 args[_i - 2] = arguments[_i];
             }
+            var _a;
             var callback = options[type];
             var callbackResult;
             var methodResult;
@@ -2634,7 +2635,7 @@ process.umask = function() { return 0; };
                 callbackResult = callback.apply(this, args.concat([this]));
             }
             // method
-            methodResult = this["on" + (type[0].toUpperCase() + type.slice(1))].apply(this, args);
+            methodResult = (_a = this)["on" + (type[0].toUpperCase() + type.slice(1))].apply(_a, args);
             return callbackResult !== undefined ? callbackResult : methodResult;
         };
         /**
@@ -2675,7 +2676,7 @@ process.umask = function() { return 0; };
 
     return SweetScroll;
 
-})));
+}));
 
 
 /***/ }),
@@ -2684,40 +2685,33 @@ process.umask = function() { return 0; };
 /*!***************************!*\
   !*** ./src/_js/_index.js ***!
   \***************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-// js - plugins
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var sweet_scroll__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweet-scroll */ "./node_modules/sweet-scroll/sweet-scroll.js");
+/* harmony import */ var sweet_scroll__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweet_scroll__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _libs_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./libs/utils */ "./src/_js/libs/utils.js");
+/* harmony import */ var _libs_uac__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./libs/uac */ "./src/_js/libs/uac.js");
+ // js - plugins
 // import Vue from 'vue';
 
-var _sweetScroll = __webpack_require__(/*! sweet-scroll */ "./node_modules/sweet-scroll/sweet-scroll.js");
 
-var _sweetScroll2 = _interopRequireDefault(_sweetScroll);
+ // js - libs
 
-var _axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
-var _axios2 = _interopRequireDefault(_axios);
 
-var _utils = __webpack_require__(/*! ./libs/utils */ "./src/_js/libs/utils.js");
-
-var _uac = __webpack_require__(/*! ./libs/uac */ "./src/_js/libs/uac.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// js - libs
-var utils = new _utils.Utils();
-var uac = new _uac.Uac();
-
+var utils = new _libs_utils__WEBPACK_IMPORTED_MODULE_2__["Utils"]();
+var uac = new _libs_uac__WEBPACK_IMPORTED_MODULE_3__["Uac"]();
 /**
  * sample
  */
 // console.log('utils.getWindowWidth: ' + utils.getWindowWidth());
 // console.log('utils.mq("1279", "max"): ' + utils.mq('1279', 'max'));
 // console.log('utils.mq("1280"): ' + utils.mq('1280'));
-
 // console.log('browser name: ' + uac.browser());
 // console.log('device name: ' + uac.device());
 // console.log('if it\'s IE: ' + uac.isIE());
@@ -2727,20 +2721,21 @@ var uac = new _uac.Uac();
 // console.log('if it\'s a touch device: ' + uac.isTouch());
 // console.log('if it\'s a modern browser: ' + uac.isModern());
 
-
 /**
  * add classes <html>
  */
-uac.homeClass();
 
+uac.homeClass();
 /**
  * 画像ロールオーバー vanilla JS
  *
  * @param none
  *
  */
+
 function smartRollover() {
   var preLoadImg = {};
+
   if (document.getElementsByClassName) {
     var elm = document.getElementsByClassName('over');
 
@@ -2750,11 +2745,13 @@ function smartRollover() {
       var onSrc = elmSrc.substr(0, sep) + '_on' + elmSrc.substr(sep, 4);
       preLoadImg[elmSrc] = new Image();
       preLoadImg[elmSrc].src = onSrc;
+
       elm[i].onmouseover = function (e) {
         e.preventDefault();
         e.currentTarget.classList.add('is-hover');
         e.currentTarget.setAttribute('src', onSrc);
       };
+
       elm[i].onmouseout = function (e) {
         e.preventDefault();
         e.currentTarget.classList.remove('is-hover');
@@ -2765,28 +2762,32 @@ function smartRollover() {
     for (var i = 0; i < elm.length; i++) {
       _loop(i);
     } // for
-  } // if
-} // func
-window.addEventListener('load', smartRollover, false);
 
+  } // if
+
+} // func
+
+
+window.addEventListener('load', smartRollover, false);
 /**
  * sweet scroll ES6
  * @author http://webdesign-dackel.com/2015/12/17/sweet-scroll/
  * @param option
  * @param HTMLElement
  */
+
 document.addEventListener('DOMContentLoaded', function () {
-  var sweetScroll = new _sweetScroll2.default({
+  var sweetScroll = new sweet_scroll__WEBPACK_IMPORTED_MODULE_0___default.a({
     header: ".l-header"
   });
 }, false);
-
 /**
  * page top btn
  *
  * @param none
  *
  */
+
 if (document.querySelectorAll('[data-pagetop]')) {
   (function () {
     var btnPageTop = document.querySelectorAll('[data-pagetop]');
@@ -2795,6 +2796,7 @@ if (document.querySelectorAll('[data-pagetop]')) {
       window.onscroll = function () {
         var offset = window.pageYOffset,
             value = btnPageTop[i].getAttribute('data-pagetop');
+
         if (offset > value) {
           btnPageTop[i].classList.add('is-active');
         } else {
@@ -2806,9 +2808,9 @@ if (document.querySelectorAll('[data-pagetop]')) {
     for (var i = 0; i < btnPageTop.length; i++) {
       _loop2(i);
     } // for
+
   })();
 } // if
-
 
 /**
  * SP Navigation
@@ -2816,23 +2818,29 @@ if (document.querySelectorAll('[data-pagetop]')) {
  * @param none
  *
  */
+
+
 if (document.querySelectorAll('[data-nav_list]')) {
   var handle = document.querySelectorAll('[data-nav_list] a');
+
   var navClose = function navClose() {
     document.getElementById('gnav_ctrl').checked = false;
   };
+
   handle.forEach(function (e) {
     e.addEventListener("click", navClose, false);
   });
 } // if
 
-
 /**
  * 投稿追加読み込み - Ajax
  */
+
+
 if (document.querySelectorAll('[data-btn_more]')) {
   var getMorePost = function getMorePost() {
     var nowPostNum = document.querySelectorAll('[data-post_item]').length; // 現在表示されている数
+
     var postWrap = document.querySelector('[data-more-post_wrap]');
     var postType = postWrap.dataset.post_type;
     var postCat = postWrap.dataset.post_cat;
@@ -2848,9 +2856,9 @@ if (document.querySelectorAll('[data-btn_more]')) {
       'now_post_num': nowPostNum,
       'post_type': postType,
       'post_cat': postCat
-    };
-    // POST通信
-    (0, _axios2.default)({
+    }; // POST通信
+
+    axios__WEBPACK_IMPORTED_MODULE_1___default()({
       method: 'POST',
       url: ajaxurl,
       data: params
@@ -2862,9 +2870,12 @@ if (document.querySelectorAll('[data-btn_more]')) {
       var loader = document.querySelector('[data-loader]');
       postWrap.insertAdjacentHTML('beforeend', response.data['html']);
       postBtn.removeChild(loader);
+
       if (response.data['noDataFlg'] > 0) {
         postBtn.insertAdjacentHTML('beforeend', '<button type="submit" class="c-btn c-btn-black c-btn-large c-btn-icon" data-btn_more><span class="c-btn_txt">More</span><i class="c-btn_icon icon-refresh" aria-hidden="true"></button>');
+
         var _btn = document.querySelector('[data-btn_more]');
+
         _btn.addEventListener("click", getMorePost, false);
       } else {
         postBtn.parentNode.removeChild(postBtn);
@@ -2873,6 +2884,7 @@ if (document.querySelectorAll('[data-btn_more]')) {
       console.log('err:', err);
     });
   };
+
   var btn = document.querySelector('[data-btn_more]');
   btn.addEventListener("click", getMorePost, false);
 }
@@ -2883,16 +2895,19 @@ if (document.querySelectorAll('[data-btn_more]')) {
 /*!************************!*\
   !*** ./src/_js/app.js ***!
   \************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _sass_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_sass/app */ "./src/_sass/app.scss");
+/* harmony import */ var _sass_app__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_sass_app__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./_index */ "./src/_js/_index.js");
+ // sass
 
-// sass
+ // js - pages
 
-__webpack_require__(/*! ../_sass/app */ "./src/_sass/app.scss");
 
-__webpack_require__(/*! ./_index */ "./src/_js/_index.js");
 
 /***/ }),
 
@@ -2900,19 +2915,17 @@ __webpack_require__(/*! ./_index */ "./src/_js/_index.js");
 /*!*****************************!*\
   !*** ./src/_js/libs/uac.js ***!
   \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: Uac */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Uac", function() { return Uac; });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 /**
  *
@@ -2930,8 +2943,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @method: homeClass()
  *
  */
-var Uac = exports.Uac = function () {
-
+var Uac =
+/*#__PURE__*/
+function () {
   /**
    * Constructor
    *
@@ -2944,17 +2958,17 @@ var Uac = exports.Uac = function () {
     _classCallCheck(this, Uac);
 
     this._uac = {}; // define _uac as a global object
+
     this.ua = window.navigator.userAgent.toLowerCase();
     this.ver = window.navigator.appVersion.toLowerCase();
   }
-
   /**
    * check browser version
    */
 
 
   _createClass(Uac, [{
-    key: 'browser',
+    key: "browser",
     value: function browser() {
       if (this.ua.indexOf('edge') !== -1) return 'edge'; // Edge
       else if (this.ua.indexOf("iemobile") !== -1) return 'iemobile'; // ieMobile
@@ -2971,23 +2985,21 @@ var Uac = exports.Uac = function () {
                 else if (this.ua.indexOf('firefox') !== -1) return 'firefox'; // FIrefox
                   else return 'unknown_browser';
     }
-
     /**
      * check device
      */
 
   }, {
-    key: 'device',
+    key: "device",
     value: function device() {
       if (this.ua.indexOf('iphone') !== -1 || this.ua.indexOf('ipod') !== -1) return 'iphone';else if (this.ua.indexOf('ipad') !== -1) return 'ipad';else if (this.ua.indexOf('android') !== -1) return 'android';else if (this.ua.indexOf('windows') !== -1 && this.ua.indexOf('phone') !== -1) return 'windows_phone';else return '';
     }
-
     /**
      * check ios version
      */
 
   }, {
-    key: 'iosVer',
+    key: "iosVer",
     value: function iosVer() {
       if (/iP(hone|od|ad)/.test(navigator.platform)) {
         var v = navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/);
@@ -2995,80 +3007,72 @@ var Uac = exports.Uac = function () {
         return versions[0];
       } else return 0;
     }
-
     /**
      * boolean IE
      */
 
   }, {
-    key: 'isIE',
+    key: "isIE",
     value: function isIE() {
       return this.browser().substr(0, 2) === 'ie' && this.browser() !== 'iemobile';
     }
-
     /**
      * boolean iOS
      */
 
   }, {
-    key: 'isiOS',
+    key: "isiOS",
     value: function isiOS() {
       return this.device() === 'iphone' || this.device() === 'ipad';
     }
-
     /**
      * boolean Mobile
      */
 
   }, {
-    key: 'isMobile',
+    key: "isMobile",
     value: function isMobile() {
       return this.ua.indexOf('mobi') !== -1 || this.device() === 'iphone' || this.device() === 'windows_phone' && this.ua.indexOf('wpdesktop') === -1 || this.device() === 'iemobile';
     }
-
     /**
      * boolean Tablet
      */
 
   }, {
-    key: 'isTablet',
+    key: "isTablet",
     value: function isTablet() {
       return this.device() === 'ipad' || this.device() === 'android' && !this.isMobile();
     }
-
     /**
      * boolean Touch Device
      */
 
   }, {
-    key: 'isTouch',
+    key: "isTouch",
     value: function isTouch() {
       return 'ontouchstart' in window;
     }
-
     /**
      * boolean Modern Browser
      */
 
   }, {
-    key: 'isModern',
+    key: "isModern",
     value: function isModern() {
       return !(this.browser() === 'ie6' || this.browser() === 'ie7' || this.browser() === 'ie8' || this.browser() === 'ie9' || 0 < this.iosVer() && this.iosVer() < 8);
     }
-
     /**
      * Set the results as class names of the html
      */
 
   }, {
-    key: 'homeClass',
+    key: "homeClass",
     value: function homeClass() {
       var classStr = '';
-      classStr += this.browser() !== '' ? this.browser() + " " : 'browser-unknown ', classStr += this.device() !== '' ? this.device() + " " : 'device-unknown ', classStr += this.isMobile() ? 'mobile ' : 'desktop ', classStr += this.isTouch() ? 'touch ' : 'mouse ', classStr += this.isiOS() ? 'ios ' : '', classStr += this.isIE() ? 'ie ' : '', classStr += this.isModern() ? 'modern ' : 'old ';
-      // return classStr;
+      classStr += this.browser() !== '' ? this.browser() + " " : 'browser-unknown ', classStr += this.device() !== '' ? this.device() + " " : 'device-unknown ', classStr += this.isMobile() ? 'mobile ' : 'desktop ', classStr += this.isTouch() ? 'touch ' : 'mouse ', classStr += this.isiOS() ? 'ios ' : '', classStr += this.isIE() ? 'ie ' : '', classStr += this.isModern() ? 'modern ' : 'old '; // return classStr;
       // document.addEventListener('DOMContentLoaded', function() {
-      document.documentElement.className += classStr;
-      // });
+
+      document.documentElement.className += classStr; // });
     }
   }]);
 
@@ -3081,19 +3085,17 @@ var Uac = exports.Uac = function () {
 /*!*******************************!*\
   !*** ./src/_js/libs/utils.js ***!
   \*******************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: Utils */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Utils", function() { return Utils; });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 /**
  *
@@ -3104,12 +3106,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @method: smoothScroll()
  *
  */
-var Utils = exports.Utils = function () {
+var Utils =
+/*#__PURE__*/
+function () {
   function Utils() {
     _classCallCheck(this, Utils);
-  }
-  // console.log('Load Utils.');
-
+  } // console.log('Load Utils.');
 
   /**
    * タッチデバイス判定
@@ -3121,12 +3123,14 @@ var Utils = exports.Utils = function () {
 
 
   _createClass(Utils, [{
-    key: 'isTouchDevice',
+    key: "isTouchDevice",
     value: function isTouchDevice() {
       var result = false;
+
       if (window.ontouchstart === null) {
         result = true;
       }
+
       return result;
     } // isTouchDevice
 
@@ -3139,7 +3143,7 @@ var Utils = exports.Utils = function () {
      */
 
   }, {
-    key: 'getWindowWidth',
+    key: "getWindowWidth",
     value: function getWindowWidth() {
       var ww = window.innerWidth;
       return ww;
@@ -3155,10 +3159,9 @@ var Utils = exports.Utils = function () {
      */
 
   }, {
-    key: 'mq',
+    key: "mq",
     value: function mq(size) {
       var rule = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'min';
-
       return window.matchMedia('(' + rule + '-width: ' + size + 'px)').matches;
     } // mq
 

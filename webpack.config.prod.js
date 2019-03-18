@@ -1,5 +1,7 @@
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const WebpackNotifierPlugin = require('webpack-notifier');
 
 // settings
@@ -48,10 +50,8 @@ module.exports = {
             // Babel のオプションを指定する
             options: {
               presets: [
-                // env を指定することで、ES2017 を ES5 に変換。
-                // {modules: false}にしないと import 文が Babel によって CommonJS に変換され、
-                // webpack の Tree Shaking 機能が使えない
-                ['env', {'modules': false}]
+                // env を指定することで、ES2017 を ES5 に変換
+                ['@babel/preset-env']
               ]
             }
           }
@@ -75,8 +75,6 @@ module.exports = {
               url: false,
               // ソースマップの利用有無
               sourceMap: userSourceMap,
-              // 空白文字やコメントを削除する
-              minimize: true,
               // Sass+PostCSSの場合は2を指定
               importLoaders: 2
             },
@@ -134,5 +132,15 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'css/[name].min.css'
     }),
-  ]
+  ],
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true
+      }),
+      new OptimizeCSSAssetsPlugin({})
+    ]
+  }
 };

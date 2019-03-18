@@ -49,9 +49,17 @@ module.exports = {
             options: {
               presets: [
                 // env を指定することで、ES2017 を ES5 に変換。
-                // {modules: false}にしないと import 文が Babel によって CommonJS に変換され、
-                // webpack の Tree Shaking 機能が使えない
-                ['env', {'modules': false}]
+                ['@babel/preset-env']
+                // [
+                //   '@babel/preset-env',
+                //   {
+                //     'modules': false,
+                //     'targets': {
+                //       'ie': 11
+                //     },
+                //     'useBuiltIns': 'usage'
+                //   }
+                // ]
               ]
             }
           }
@@ -75,8 +83,6 @@ module.exports = {
               url: false,
               // ソースマップの利用有無
               sourceMap: userSourceMap,
-              // 空白文字やコメントを削除する
-              minimize: true,
               // Sass+PostCSSの場合は2を指定
               importLoaders: 2
             },
