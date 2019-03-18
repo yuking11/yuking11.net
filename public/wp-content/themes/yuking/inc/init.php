@@ -35,6 +35,18 @@ remove_action('wp_head', 'wp_shortlink_wp_head');
 remove_action('wp_head', 'adjacent_posts_rel_link_wp_head');
 //RSSフィードのURL
 remove_action('wp_head', 'feed_links_extra', 3);
+//絵文字機能
+remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+remove_action( 'wp_print_styles', 'print_emoji_styles' );
+// embed
+remove_action('wp_head','rest_output_link_wp_head');
+remove_action('wp_head','wp_oembed_add_discovery_links');
+remove_action('wp_head','wp_oembed_add_host_js');
+remove_action('template_redirect', 'rest_output_link_header', 11 );
+// block-css
+add_action('wp_enqueue_scripts', function() {
+  wp_deregister_style('wp-block-library');
+});
 
 /**
  * 投稿関連

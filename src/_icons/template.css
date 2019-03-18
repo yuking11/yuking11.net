@@ -6,8 +6,7 @@
   src: url( "<%= fontPath %><%= fontName %>.eot?c=<%= timeStamp %>" );
   src: url( "<%= fontPath %><%= fontName %>.eot?#iefix?c=<%= timeStamp %>" ) format( "eot" ),
        url( "<%= fontPath %><%= fontName %>.woff?c=<%= timeStamp %>" ) format( "woff" ),
-       url( "<%= fontPath %><%= fontName %>.ttf?c=<%= timeStamp %>" ) format( "truetype" ),
-       url( "<%= fontPath %><%= fontName %>.svg#<%= fontName %>?c=<%= timeStamp %>" ) format( "svg" );
+       url( "<%= fontPath %><%= fontName %>.ttf?c=<%= timeStamp %>" ) format( "truetype" );
   font-weight: normal;
   font-style: normal;
   font-display: block;

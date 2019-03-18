@@ -34,10 +34,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 // <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet">
 
 ?>
-<link rel="preload" href="https://fonts.googleapis.com/css?family=M+PLUS+1p:400,700|Nunito:400,600,700" as="font">
-<link rel="preload" href="https://fonts.googleapis.com/css?family=M+PLUS+1p:400,700|Nunito:400,600,700" as="style">
-<link href="https://fonts.googleapis.com/css?family=M+PLUS+1p:400,700|Nunito:400,600,700" rel="stylesheet">
+
+<link rel="preload" href="https://fonts.googleapis.com/css?family=M+PLUS+1p:400,700|Nunito:400,700" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://fonts.googleapis.com/css?family=M+PLUS+1p:400,700|Nunito:400,700" as="font" type="font/woff" crossorigin="anonymous">
+<link rel="preload" href="https://fonts.googleapis.com/css?family=M+PLUS+1p:400,700|Nunito:400,700" as="style">
 <?php
+  /*
+<link href="https://fonts.googleapis.com/css?family=M+PLUS+1p:400,700|Nunito:400,700" rel="stylesheet">
+  */
   $css_timestamp = getTimeStamp( '/assets/css/app.css' );
   if ( isProduction() ) {
     // $css_file = '/assets/css/app.css?' . $css_timestamp;

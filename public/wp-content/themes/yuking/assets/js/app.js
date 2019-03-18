@@ -2722,8 +2722,50 @@ var uac = new _libs_uac__WEBPACK_IMPORTED_MODULE_3__["Uac"]();
 // console.log('if it\'s a modern browser: ' + uac.isModern());
 
 /**
+ * async Google Fonts
+ */
+
+var loadFont = function loadFont(url) {
+  // the 'fetch' equivalent has caching issues
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url, true);
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      var css = xhr.responseText;
+      css = css.replace(/}/g, 'font-display: swap; }');
+      var head = document.getElementsByTagName('head')[0];
+      var style = document.createElement('style');
+      style.appendChild(document.createTextNode(css));
+      head.appendChild(style);
+    }
+  };
+
+  xhr.send();
+};
+
+loadFont('https://fonts.googleapis.com/css?family=M+PLUS+1p:400,700|Nunito:400,700');
+window.WebFontConfig = {
+  google: {
+    families: ['M+PLUS+1p:400,700', 'Nunito:400,600,700']
+  },
+  active: function active() {
+    sessionStorage.fonts = true;
+  }
+};
+
+(function () {
+  var wf = document.createElement('script');
+  wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
+  wf.type = 'text/javascript';
+  wf.async = 'true';
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(wf, s);
+})();
+/**
  * add classes <html>
  */
+
 
 uac.homeClass();
 /**
