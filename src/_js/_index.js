@@ -161,7 +161,8 @@ if ( document.querySelectorAll('[data-nav_list]') ) {
  * 投稿追加読み込み - Ajax
  */
 if ( document.querySelectorAll('[data-btn_more]') ) {
-  let getMorePost = () => {
+  let getMorePost = (e) => {
+    e.preventDefault();
     let nowPostNum = document.querySelectorAll('[data-post_item]').length;// 現在表示されている数
     let postWrap = document.querySelector('[data-more-post_wrap]');
     let postType = postWrap.dataset.post_type;

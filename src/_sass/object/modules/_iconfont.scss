@@ -3,10 +3,10 @@
 =========================================== */
 @font-face {
   font-family: "icon";
-  src: url( "../fonts/icon.eot?c=1552896285667" );
-  src: url( "../fonts/icon.eot?#iefix?c=1552896285667" ) format( "eot" ),
-       url( "../fonts/icon.woff?c=1552896285667" ) format( "woff" ),
-       url( "../fonts/icon.ttf?c=1552896285667" ) format( "truetype" );
+  src: url( "../fonts/icon.eot?c=1557392300739" );
+  src: url( "../fonts/icon.eot?#iefix?c=1557392300739" ) format( "eot" ),
+       url( "../fonts/icon.woff?c=1557392300739" ) format( "woff" ),
+       url( "../fonts/icon.ttf?c=1557392300739" ) format( "truetype" );
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -35,4 +35,5 @@
 .icon-search:before { content: "\F009" }
 .icon-tags:before { content: "\F00A" }
 .icon-terminal:before { content: "\F00B" }
-.icon-twitter:before { content: "\F00C" }
+.icon-thumbs-up:before { content: "\F00C" }
+.icon-twitter:before { content: "\F00D" }

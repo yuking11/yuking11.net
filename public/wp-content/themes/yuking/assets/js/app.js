@@ -2880,7 +2880,8 @@ if (document.querySelectorAll('[data-nav_list]')) {
 
 
 if (document.querySelectorAll('[data-btn_more]')) {
-  var getMorePost = function getMorePost() {
+  var getMorePost = function getMorePost(e) {
+    e.preventDefault();
     var nowPostNum = document.querySelectorAll('[data-post_item]').length; // 現在表示されている数
 
     var postWrap = document.querySelector('[data-more-post_wrap]');

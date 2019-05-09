@@ -63,7 +63,8 @@
     font-size: fs(16);
   }// .p-post_ttl
 
-  .p-post_url {
+  .p-post_url,
+  .p-post_likes {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -78,6 +79,11 @@
       font-size: fs(16);
     }// .p-post_icon
   }// .p-post_url
+
+  .p-post_link-qiita {
+    color: $font_color;
+    text-decoration: none;
+  }// .p-post_link-qiita
 
   .p-post_tags {
     position: relative;
@@ -176,7 +182,8 @@
       }// &::before;
     }// .p-post_tags
 
-    .p-post_url {
+    .p-post_url,
+    .p-post_likes {
       padding: 0 ($ct_gutter * 1.5);
     }// .p-post_url
 

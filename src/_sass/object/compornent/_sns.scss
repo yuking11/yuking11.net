@@ -16,13 +16,19 @@
   list-style: none;
   line-height: 1;
 
+  &-start {
+    justify-content: flex-start;
+  }// &-start
+
   .c-sns_item {
     margin: 0 ($ct_gutter / 2);
     padding: 0;
   }// .c-sns_item
 
   .c-sns_link {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: $font_color;
     font-size: 0;
     text-decoration: none;
@@ -35,6 +41,11 @@
   .c-sns_icon {
     font-size: fs(26);
   }// .c-sns_icon
+
+  .c-sns_txt {
+    margin-left: $ct_gutter_half;
+    font-size: fs(16);
+  }// .c-sns_txt
 
   .l-header & {
     .c-sns_link {
