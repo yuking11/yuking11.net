@@ -100,6 +100,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li class="p-nav_item">
           <a href="#section-portfolio" class="p-nav_link" data-scroll>Portfolio</a>
         </li>
+        </li>
+        <li class="p-nav_item">
+          <a href="#section-blog" class="p-nav_link" data-scroll>Qiita</a>
+        </li>
         <?php
           /*
         <li class="p-nav_item">
@@ -169,6 +173,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       ?></li>
       <li class="gnav_item"><a href="#section-about" class="gnav_link" data-scroll>About</a></li>
       <li class="gnav_item"><a href="#section-portfolio" class="gnav_link" data-scroll>Portfolio</a></li>
+      <li class="gnav_item"><a href="#section-blog" class="gnav_link" data-scroll>Qiita</a></li>
       <?php
         /*
       <li class="gnav_item"><a href="<?php echo esc_url( home_url('/blog/') ); ?>" class="gnav_link">Blog</a></li>
