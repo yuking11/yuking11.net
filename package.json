@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "this project is portfolio-site 'yuking11.net'.",
   "author": "@yuking11",
-  "licence": "No License",
+  "licence": "MIT License",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=develop nuxt-ts",

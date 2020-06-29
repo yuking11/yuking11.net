@@ -1,5 +1,6 @@
 # yuking11.net
 
+![deploy](https://github.com/yuking11/yuking11.net/workflows/deploy/badge.svg?branch=master)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ポートフォリオサイト「yuking11.net」
