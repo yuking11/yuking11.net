@@ -1,0 +1,53 @@
+name: Deploy to github-pages
+
+# master-branchへのpush/pull-requestが対象
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-18.04
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup node ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Cache node modules
+      uses: actions/cache@v1
+      with:
+        path: node_modules
+        key: ${{ runner.OS }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.OS }}-yarn-
+
+    - name: Create .env file
+      run: echo "${{ secrets.ENV_PROD }}" > env/.env.production
+
+    - name: yarn install
+      run: yarn install
+
+    - name: yarn lint
+      run: yarn lint
+
+    - name: yarn test
+      run: yarn test
+
+    - name: yarn generate
+      run: yarn generate:gh-pages
+
+    - name: deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist

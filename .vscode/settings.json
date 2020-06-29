@@ -1,0 +1,48 @@
+{
+  //タイトルにパスを表示
+  "window.title": "[${dirty}${rootName}] ${activeEditorMedium}",
+  //空白文字表示するか
+  "editor.renderWhitespace": "all",
+  //READMEの制御文字を表示して気づきやすくする
+  "editor.renderControlCharacters": true,
+  //ファイルを開いた時にタブが上書きされる問題を回避
+  "workbench.editor.enablePreview": false,
+  //ダブルクリックしたときハイフンで途切れない設定
+  "editor.wordSeparators": "`~!@#%^&*()=+[{]}\\|;:'\",.<>/?",
+  "files.associations": {
+    "*.vue": "vue"
+  },
+  "vetur.useWorkspaceDependencies": true,
+  "eslint.validate": [
+    {
+      "language": "vue",
+      "autoFix": true
+    },
+    {
+      "language": "javascript",
+      "autoFix": true
+    },
+    {
+      "language": "javascriptreact",
+      "autoFix": true
+    }
+  ],
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+  "typescript.format.insertSpaceBeforeFunctionParenthesis": true,
+  "eslint.enable": true,
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.tslint": true,
+    "source.fixAll": true
+  },
+  "eslint.run": "onType",
+  "vetur.format.defaultFormatter.js": "prettier",
+  "vetur.format.defaultFormatter.css": "prettier",
+  "vetur.format.defaultFormatter.less": "prettier",
+  "vetur.format.defaultFormatter.postcss": "prettier",
+  "vetur.format.defaultFormatter.scss": "prettier",
+  "vetur.format.defaultFormatter.ts": "prettier",
+  "vetur.validation.style": true,
+  "vetur.validation.template": true
+}
