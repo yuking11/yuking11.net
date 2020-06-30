@@ -23,9 +23,3 @@ $ yarn generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
-
-## License
-
-No License
-
-https://choosealicense.com/no-permission/
