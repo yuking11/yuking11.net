@@ -1,6 +1,9 @@
 import { resolve } from 'path'
 import internalIp from 'internal-ip'
-
+// Use dart-sass
+import Fiber from 'fibers'
+import Sass from 'sass'
+// setup env
 const env = process.env.NODE_ENV
 const envFile = `.env.${env}`
 
@@ -155,6 +158,14 @@ export default async () => {
        */
       extend() {},
       transpile: ['vee-validate/dist/rules'],
+      loaders: {
+        scss: {
+          implementation: Sass,
+          sassOptions: {
+            fiber: Fiber,
+          },
+        },
+      },
     },
   }
 
