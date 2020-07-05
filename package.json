@@ -31,8 +31,6 @@
   "dependencies": {
     "@nuxt/typescript-runtime": "^0.4.10",
     "@nuxtjs/axios": "^5.11.0",
-    "bootstrap": "^4.5.0",
-    "bootstrap-vue": "^2.15.0",
     "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
     "nuxt": "^2.13.0",
@@ -67,6 +65,7 @@
     "lint-staged": "^10.2.11",
     "nuxt-svg-loader": "^1.2.0",
     "prettier": "^2.0.5",
+    "sanitize.css": "^11.0.1",
     "sass": "^1.26.9",
     "sass-loader": "^8.0.2",
     "stylelint": "^13.6.1",

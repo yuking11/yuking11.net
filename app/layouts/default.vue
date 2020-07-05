@@ -1,8 +1,26 @@
 <template>
   <div>
+    <TheHeader />
     <Nuxt />
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <TheFooter />
+    <HeaderNavCollapse />
   </div>
 </template>
+
+<script>
+import TheHeader from '~/components/common/TheHeader.vue'
+import HeaderNavCollapse from '~/components/common/header/HeaderNavCollapse.vue'
+import TheFooter from '~/components/common/TheFooter.vue'
+
+export default {
+  components: {
+    TheHeader,
+    HeaderNavCollapse,
+    TheFooter,
+  },
+}
+</script>
 
 <style>
 html {

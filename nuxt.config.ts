@@ -75,7 +75,7 @@ export default async () => {
         {
           rel: 'stylesheet',
           href:
-            'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap',
+            'https://fonts.googleapis.com/css?family=M+PLUS+1p:400,700|Nunito:400,700&display=swap',
         },
       ],
     },
@@ -86,12 +86,23 @@ export default async () => {
     /*
      ** Global CSS
      */
-    css: [],
+    css: [
+      'sanitize.css',
+      '~/assets/css/default.scss',
+      '~/assets/css/utils/align.scss',
+      '~/assets/css/utils/margin.scss',
+      '~/assets/css/utils/layout.scss',
+      '~/assets/css/utils/text.scss',
+    ],
     /*
      ** Common Style Resources
      */
     styleResources: {
-      scss: [],
+      scss: [
+        '~/assets/css/settings/*.scss',
+        '~/assets/css/functions/*.scss',
+        '~/assets/css/mixins/*.scss',
+      ],
     },
     /*
      ** Plugins to load before mounting the App
@@ -111,8 +122,6 @@ export default async () => {
      ** Nuxt.js modules
      */
     modules: [
-      // Doc: https://bootstrap-vue.js.org
-      'bootstrap-vue/nuxt',
       'nuxt-svg-loader',
       '@nuxtjs/svg-sprite',
       // Doc: https://axios.nuxtjs.org/usage
@@ -156,6 +165,12 @@ export default async () => {
       /*
        ** You can extend webpack config here
        */
+      filenames: {
+        app: ({ isDev }: { isDev: any }) =>
+          isDev ? '[name].[hash].js' : '[chunkhash].js',
+        chunk: ({ isDev }: { isDev: any }) =>
+          isDev ? '[name].[hash].js' : '[chunkhash].js',
+      },
       extend() {},
       transpile: ['vee-validate/dist/rules'],
       loaders: {
