@@ -24,9 +24,11 @@ describe('SectionTitleSub', () => {
     wrapper.setProps({
       title: 'title',
       tag: 'h4',
+      variant: 'primary',
     })
     expect(wrapper.vm.$props.title).toBe('title')
     expect(wrapper.vm.$props.tag).toBe('h4')
+    expect(wrapper.vm.$props.variant).toBe('primary')
   })
 
   test('requiredがtrueになっていること', () => {
@@ -35,8 +37,10 @@ describe('SectionTitleSub', () => {
 
   test('propsのバリデーションチェック', () => {
     wrapper.setProps({
-      tag: 'div',
+      tag: 'p',
+      variant: 'failed',
     })
     expect(wrapper.vm.$props.tag.validator).toBeFalsy()
+    expect(wrapper.vm.$props.variant.validator).toBeFalsy()
   })
 })

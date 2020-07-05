@@ -26,6 +26,27 @@ $font_color_exlight: #999;
 $font_color_splight: #CCC;
 $font_color_dark: #000;
 
+// variants
+$base_primary_bg: #b0d3f8;
+$base_primary_text: #004085;
+$base_secondary_bg: #e2e3e5;
+$base_secondary_text: #383d41;
+$base_success_bg: #d4edda;
+$base_success_text: #155724;
+$base_danger_bg: #f8d7da;
+$base_danger_text: #721c24;
+$base_warning_bg: #fff3cd;
+$base_warning_text: #856404;
+$base_info_bg: #d1ecf1;
+$base_info_text: #0c5460;
+$base_light_bg: #fefefe;
+$base_light_text: #818182;
+$base_dark_bg: #d6d8d9;
+$base_dark_text: #1b1e21;
+$base_white_bg: #fff;
+$base_white_text: #fff;
+$base_black_bg: #696969;
+$base_black_text: #333;
 
 // Link
 // ================================== //
@@ -44,29 +65,49 @@ $link_color_tertiary: #0064FF;
 // Button
 // ================================== //
 
-$btn_bg_color_default: #FBFBFB;
-$btn_bdr_color_default: #D4D4D4;
-$btn_txt_color_default: #333;
+$btn_default_bg: #e0e0e0;
+$btn_default_bg_hover: #f5f5f5;
+$btn_default_text: #333;
 
-$btn_bg_color_caution: #EB6855;
-$btn_bdr_color_caution: #C22D18;
-$btn_txt_color_caution: #FFF;
+$btn_primary_bg: #007bff;
+$btn_primary_bg_hover: #0069d9;
+$btn_primary_text: #fff;
 
-$btn_bg_color_primary: #F90;
-$btn_bdr_color_primary: #F60;
-$btn_txt_color_primary: #FFF;
+$btn_secondary_bg: #545b62;
+$btn_secondary_bg_hover: #5a6268;
+$btn_secondary_text: #fff;
 
-$btn_bg_color_secondary: #3E75E1;
-$btn_bdr_color_secondary: #2F57A6;
-$btn_txt_color_secondary: #FFF;
+$btn_success_bg: #1e7e34;
+$btn_success_bg_hover: #218838;
+$btn_success_text: #fff;
 
-$btn_bg_color_tertiary: #1CB841;
-$btn_bdr_color_tertiary: #15812F;
-$btn_txt_color_tertiary: #FFF;
+$btn_danger_bg: #bd2130;
+$btn_danger_bg_hover: #c82333;
+$btn_danger_text: #212529;
 
-$btn_bg_color_black: #333;
-$btn_bdr_color_black: #000;
-$btn_txt_color_black: #FFF;
+$btn_warning_bg: #d39e00;
+$btn_warning_bg_hover: #e0a800;
+$btn_warning_text: #fff;
+
+$btn_info_bg: #117a8b;
+$btn_info_bg_hover: #138496;
+$btn_info_text: #fff;
+
+$btn_light_bg: #dae0e5;
+$btn_light_bg_hover: #e2e6ea;
+$btn_light_text: #212529;
+
+$btn_dark_bg: #1d2124;
+$btn_dark_bg_hover: #23272b;
+$btn_dark_text: #fff;
+
+$btn_white_bg: #eee;
+$btn_white_bg_hover: #fff;
+$btn_white_text: #212529;
+
+$btn_black_bg: #000;
+$btn_black_bg_hover: #333;
+$btn_black_text: #fff;
 
 
 // form カラー

@@ -47,6 +47,16 @@
           />
         </a>
       </li>
+      <li class="sns-item">
+        <a
+          href="https://github.com/yuking11/"
+          class="sns-link"
+          target="_blank"
+          rel="noopener"
+        >
+          <SvgIcon class="sns-icon" name="github" title="github" :fill="fill" />
+        </a>
+      </li>
     </ul>
   </div>
 </template>

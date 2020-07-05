@@ -2,6 +2,7 @@
   <div>
     <TheHeader />
     <Nuxt />
+    <TheContact />
     <TheFooter />
     <HeaderNavCollapse />
   </div>
@@ -10,12 +11,14 @@
 <script>
 import TheHeader from '~/components/common/TheHeader.vue'
 import HeaderNavCollapse from '~/components/common/header/HeaderNavCollapse.vue'
+import TheContact from '~/components/common/TheContact.vue'
 import TheFooter from '~/components/common/TheFooter.vue'
 
 export default {
   components: {
     TheHeader,
     HeaderNavCollapse,
+    TheContact,
     TheFooter,
   },
 }
