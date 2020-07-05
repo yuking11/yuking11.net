@@ -2,6 +2,50 @@
 // layout
 // -------------------------------------------
 
+// section
+// ================================== //
+@mixin section($route: 'sub') {
+  @if $route == 'top' {
+    margin-bottom: $ct_gutter * 1.5;
+    padding: ($ct_gutter * 1.5) 0;
+    &:first-of-type {
+      margin-top: $ct_gutter * 1.5;
+    }
+  } @else {
+    padding: ($ct_gutter * 1.5) 0;
+  }
+
+  &:not(:last-of-type) {
+    margin-bottom: $ct_gutter * 1.5;
+  }
+
+  @include mq(tab) {
+    @if $route == 'top' {
+      margin-bottom: $ct_gutter * 2;
+      padding: ($ct_gutter * 2) 0;
+      &:first-of-type {
+        margin-top: $ct_gutter * 2;
+      }
+    } @else {
+      padding: ($ct_gutter * 2) 0;
+    }
+
+    &:not(:last-of-type) {
+      margin-bottom: $ct_gutter * 2;
+    }
+  }
+}
+
+// content inner
+// ================================== //
+@mixin inner() {
+  width: 100%;
+  max-width: calc(#{$site_width} + (#{$ct_gutter} * 2));
+  margin: 0 auto;
+  padding-right: $ct_gutter;
+  padding-left: $ct_gutter;
+}
+
 // 横軸中央配置
 // ================================== //
 @mixin l-center($width: $site_width, $max: true, $block: false) {

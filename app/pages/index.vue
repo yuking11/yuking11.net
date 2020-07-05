@@ -1,10 +1,11 @@
 <template>
-  <div>
+  <div class="container">
     <TheHero
       route="top"
       :title="'Yuki Saito\'s\nPortfolio Site'"
       note="Frontend Engineer"
     />
+    <About class="section section-about" />
   </div>
 </template>
 
@@ -21,10 +22,12 @@ import {
   // SetupContext,
 } from 'nuxt-composition-api'
 import TheHero from '~/components/common/TheHero.vue'
+import About from '~/components/pages/top/About.vue'
 
 export default defineComponent({
   components: {
     TheHero,
+    About,
   },
   head: {},
   setup() {
@@ -37,3 +40,9 @@ export default defineComponent({
   },
 })
 </script>
+
+<style lang="scss" scoped>
+.section {
+  @include section('top');
+}
+</style>

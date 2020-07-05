@@ -170,7 +170,15 @@ export default async () => {
         chunk: ({ isDev }: { isDev: any }) =>
           isDev ? '[name].[hash].js' : '[chunkhash].js',
       },
-      extend() {},
+      extend(config: any) {
+        const vueLoader = config.module.rules.find(
+          (rule: any) => rule.loader === 'vue-loader'
+        )
+        vueLoader.options.transformAssetUrls = {
+          video: ['src', 'poster'],
+          source: 'src',
+        }
+      },
       transpile: ['vee-validate/dist/rules'],
       loaders: {
         scss: {
