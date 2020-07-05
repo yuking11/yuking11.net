@@ -1,6 +1,10 @@
 <template>
   <div>
-    <TheHero />
+    <TheHero
+      route="top"
+      :title="'Yuki Saito\'s\nPortfolio Site'"
+      note="Frontend Engineer"
+    />
   </div>
 </template>
 
@@ -16,7 +20,7 @@ import {
   // toRefs,
   // SetupContext,
 } from 'nuxt-composition-api'
-import TheHero from '@/components/top/TheHero.vue'
+import TheHero from '~/components/common/TheHero.vue'
 
 export default defineComponent({
   components: {
@@ -24,12 +28,9 @@ export default defineComponent({
   },
   head: {},
   setup() {
-    // set title
-    const siteName = 'yuking11.net'
-
     // meta
     useMeta({
-      title: siteName,
+      title: process.env.SITE_NAME,
     })
 
     return {}
