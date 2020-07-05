@@ -5,7 +5,7 @@
       :title="'Yuki Saito\'s\nPortfolio Site'"
       note="Frontend Engineer"
     />
-    <About class="section section-about" />
+    <TopAbout class="section section-about" />
   </div>
 </template>
 
@@ -22,12 +22,12 @@ import {
   // SetupContext,
 } from 'nuxt-composition-api'
 import TheHero from '~/components/common/TheHero.vue'
-import About from '~/components/pages/top/About.vue'
+import TopAbout from '~/components/pages/top/TopAbout.vue'
 
 export default defineComponent({
   components: {
     TheHero,
-    About,
+    TopAbout,
   },
   head: {},
   setup() {

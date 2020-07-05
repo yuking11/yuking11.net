@@ -15,7 +15,7 @@
 <script lang="ts">
 import { defineComponent } from 'nuxt-composition-api'
 import HeaderNav from '~/components/common/header/HeaderNav.vue'
-import SnsList from '~/components/common/SnsList.vue'
+import SnsList from '~/components/modules/SnsList.vue'
 
 export default defineComponent({
   components: {

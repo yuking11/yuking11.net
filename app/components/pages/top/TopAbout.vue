@@ -1,5 +1,5 @@
 <template>
-  <section class="about">
+  <section class="top-about">
     <div class="about-inner">
       <SectionTitle title="About Me" />
 
@@ -81,7 +81,7 @@ import {
 } from 'nuxt-composition-api'
 import SectionTitle from '~/components/modules/SectionTitle.vue'
 import SectionTitleSub from '~/components/modules/SectionTitleSub.vue'
-import SkillRating from '~/components/pages/top/SkillRating.vue'
+import SkillRating from '~/components/modules/SkillRating.vue'
 
 export default defineComponent({
   components: {

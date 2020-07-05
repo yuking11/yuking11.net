@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import SkillRating from '~/components/pages/top/SkillRating.vue'
+import SkillRating from '~/components/modules/SkillRating.vue'
 
 describe('SkillRating', () => {
   let wrapper

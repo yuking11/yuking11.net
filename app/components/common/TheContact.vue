@@ -23,7 +23,7 @@ import {
   // SetupContext,
 } from 'nuxt-composition-api'
 import SectionTitle from '~/components/modules/SectionTitle.vue'
-import SnsList from '~/components/common/SnsList.vue'
+import SnsList from '~/components/modules/SnsList.vue'
 
 export default defineComponent({
   components: {

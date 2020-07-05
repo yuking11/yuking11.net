@@ -1,11 +1,11 @@
 import { shallowMount } from '@vue/test-utils'
-import About from '~/components/pages/top/About.vue'
+import TopAbout from '~/components/pages/top/TopAbout.vue'
 
-describe('About', () => {
+describe('TopAbout', () => {
   let wrapper
 
   beforeEach(() => {
-    wrapper = shallowMount(About)
+    wrapper = shallowMount(TopAbout)
   })
 
   afterEach(() => {
