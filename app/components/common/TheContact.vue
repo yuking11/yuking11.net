@@ -39,10 +39,12 @@ export default defineComponent({
   @include section();
   background-color: #000;
   color: #fff;
+  margin-top: $ct_gutter * 3;
   padding-top: $ct_gutter * 3;
   padding-bottom: $ct_gutter * 3;
 
   @include mq(tab) {
+    margin-top: $ct_gutter * 6;
     padding-top: $ct_gutter * 3;
     padding-bottom: $ct_gutter * 4;
   }

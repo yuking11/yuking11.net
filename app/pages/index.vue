@@ -6,6 +6,8 @@
       note="Frontend Engineer"
     />
     <TopAbout class="section section-about" />
+    <TopWorks class="section section-works" />
+    <TopBlog class="section section-blog" />
   </div>
 </template>
 
@@ -23,11 +25,15 @@ import {
 } from 'nuxt-composition-api'
 import TheHero from '~/components/common/TheHero.vue'
 import TopAbout from '~/components/pages/top/TopAbout.vue'
+import TopWorks from '~/components/pages/top/TopWorks.vue'
+import TopBlog from '~/components/pages/top/TopBlog.vue'
 
 export default defineComponent({
   components: {
     TheHero,
     TopAbout,
+    TopWorks,
+    TopBlog,
   },
   head: {},
   setup() {

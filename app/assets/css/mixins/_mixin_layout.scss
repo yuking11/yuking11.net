@@ -42,8 +42,8 @@
   width: 100%;
   max-width: calc(#{$site_width} + (#{$ct_gutter} * 2));
   margin: 0 auto;
-  padding-right: $ct_gutter;
-  padding-left: $ct_gutter;
+  padding-right: $ct_gutter *2;
+  padding-left: $ct_gutter *2;
 }
 
 // 横軸中央配置
