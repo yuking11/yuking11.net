@@ -12,7 +12,7 @@
       </PostList>
 
       <div class="button-wrapper">
-        <DefaultButton
+        <Button
           text="More"
           size="xl"
           variant="black"
@@ -42,14 +42,14 @@ import {
 import SectionTitle from '~/components/modules/SectionTitle.vue'
 import PostList from '~/components/modules/PostList.vue'
 import PostListItemQiita from '~/components/modules/PostListItemQiita.vue'
-import DefaultButton from '~/components/modules/DefaultButton.vue'
+import Button from '~/components/modules/Button.vue'
 
 export default defineComponent({
   components: {
     SectionTitle,
     PostList,
     PostListItemQiita,
-    DefaultButton,
+    Button,
   },
   setup() {
     return {}
