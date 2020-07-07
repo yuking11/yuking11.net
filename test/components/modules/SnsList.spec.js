@@ -19,7 +19,6 @@ describe('SnsList', () => {
   test('propsを受け取れること', () => {
     wrapper.setProps({
       fill: '#f00',
-      rating: 5,
     })
     expect(wrapper.vm.$props.fill).toBe('#f00')
   })
