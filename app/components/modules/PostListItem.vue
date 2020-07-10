@@ -1,36 +1,25 @@
 <template>
   <article class="post-item">
-    <a
-      href="https://www.example.com/"
-      class="post-link"
-      target="_blank"
-      rel="noreferrer"
-    >
+    <a :href="url" class="post-link" target="_blank" rel="noreferrer">
       <div class="post-head">
-        <img
-          src="http://placehold.jp/720x480.png?text=dummy"
-          alt="dummy"
-          class="post-img"
-        />
+        <img :src="image" :alt="title" class="post-img" />
         <div class="post-summary">
-          <div class="post-summary-title">ダミータイトル</div>
-          <p class="post-summary-text">ダミーディスクリプション</p>
+          <div class="post-summary-title">{{ title }}</div>
+          <p class="post-summary-text">{{ description }}</p>
+          <p class="post-summary-text">{{ publishedAt }}リリース</p>
         </div>
       </div>
-      <h3 class="post-title">ダミータイトル</h3>
+      <h3 class="post-title">{{ title }}</h3>
       <div class="post-meta">
         <SvgIcon name="external" title="external" />
-        <p class="post-url">https://www.example.com/</p>
+        <p class="post-url">{{ url }}</p>
       </div>
       <div class="post-meta">
         <SvgIcon name="tags" title="タグ" />
         <ul class="post-tag">
-          <li class="tag-item">タグ1</li>
-          <li class="tag-item">タグ2</li>
-          <li class="tag-item">タグ3</li>
-          <li class="tag-item">タグ3</li>
-          <li class="tag-item">タグ3</li>
-          <li class="tag-item">タグ3</li>
+          <li v-for="tag in tags" :key="tag.name" class="tag-item">
+            {{ tag.name }}
+          </li>
         </ul>
       </div>
     </a>
@@ -39,22 +28,46 @@
 
 <script lang="ts">
 import { defineComponent } from 'nuxt-composition-api'
+import { Tags } from '~/types/api-schema'
 
 type Props = Readonly<{
-  fill: string
+  title: string
+  description: string
+  url: string
+  tags: Tags[]
+  image: string
+  publishedAt: string
 }>
 
 export default defineComponent({
   props: {
-    fill: {
-      type: String as () => Props['fill'],
-      default: '#000',
+    title: {
+      type: String as () => Props['title'],
+      required: true,
+    },
+    description: {
+      type: String as () => Props['description'],
+      required: true,
+    },
+    url: {
+      type: String as () => Props['url'],
+      required: true,
+    },
+    tags: {
+      type: Array as () => Props['tags'],
+      required: true,
+    },
+    image: {
+      type: String as () => Props['image'],
+      default: '',
+    },
+    publishedAt: {
+      type: String as () => Props['publishedAt'],
+      required: true,
     },
   },
-  setup(props: Props) {
-    return {
-      props,
-    }
+  setup() {
+    return {}
   },
 })
 </script>
@@ -146,6 +159,7 @@ export default defineComponent({
 }
 
 .post-summary-text {
+  margin: 1em 0;
   font-size: fs(14);
 }
 

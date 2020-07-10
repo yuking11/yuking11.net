@@ -8,11 +8,16 @@
           <Loading />
         </template>
         <PostList v-else>
-          <PostListItem />
-          <PostListItem />
-          <PostListItem />
-          <PostListItem />
-          <PostListItem />
+          <PostListItem
+            v-for="item in worksData.contents"
+            :key="item.id"
+            :title="item.title"
+            :description="item.description"
+            :url="item.url"
+            :tags="item.tags"
+            :image="item.image"
+            :published-at="item.publishedAt"
+          />
         </PostList>
       </div>
 
@@ -30,18 +35,21 @@
 </template>
 
 <script lang="ts">
-// import { Context } from '@nuxt/types'
 import {
   defineComponent,
   // useContext,
   // useMeta,
-  // useFetch,
+  useFetch,
   // reactive,
-  // ref,
+  ref,
   // toRefs,
   // SetupContext,
 } from 'nuxt-composition-api'
+import { Ref } from '@vue/composition-api'
+import cloneDeep from 'lodash/cloneDeep'
+import { Works } from '~/types/api-schema'
 import SectionTitle from '~/components/modules/SectionTitle.vue'
+import { fetchApi } from '~/utils/fetchApi'
 import PostList from '~/components/modules/PostList.vue'
 import PostListItem from '~/components/modules/PostListItem.vue'
 import Button from '~/components/modules/Button.vue'
@@ -56,14 +64,62 @@ export default defineComponent({
     Loading,
   },
   setup() {
+    const { worksData } = useWorks()
+
     const getMorePost = () => {
       return window.alert('getMorePost')
     }
+
     return {
+      worksData,
       getMorePost,
     }
   },
 })
+
+type UseWorks = {
+  worksData: Ref<Works>
+}
+
+const useWorks = (): UseWorks => {
+  const state = ref<Works>({
+    contents: [],
+    totalCount: 0,
+    offset: 0,
+    limit: 6,
+  })
+
+  // life cycle event
+
+  useFetch(async () => {
+    const { data, err } = await fetchApi<Works>('works', {
+      headers: {
+        'X-API-KEY': process.env.API_TOKEN,
+      },
+      params: {
+        limit: 6,
+        offset: 0,
+      },
+    })
+
+    if (err) {
+      throw new Error(err.message)
+    }
+
+    state.value = cloneDeep(data)
+
+    state.value.contents.map((item) => {
+      if (item.image) {
+        item.image = require(`~/assets/img/works/${item.image}`)
+      }
+      return item
+    })
+  })
+
+  return {
+    worksData: state,
+  }
+}
 </script>
 
 <style lang="scss" scoped>

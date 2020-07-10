@@ -175,12 +175,15 @@ export default defineComponent({
 }
 
 .post-summary-title {
-  margin-bottom: 0.5em;
   font-size: fs(16);
 }
 
 .post-summary-text {
   font-size: fs(14);
+
+  &:first-of-type {
+    margin-top: 1em;
+  }
 }
 
 .post-title {
