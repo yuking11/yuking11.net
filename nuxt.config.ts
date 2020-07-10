@@ -28,7 +28,7 @@ export default async () => {
      ** Nuxt rendering mode
      ** See https://nuxtjs.org/api/configuration-mode
      */
-    mode: 'universal',
+    mode: 'spa',
     /*
      ** Nuxt target
      ** See https://nuxtjs.org/api/configuration-target
@@ -46,7 +46,9 @@ export default async () => {
       // middleware: ['auth'],
     },
     env: {
+      BASE_URL: process.env.BASE_URL,
       API_BASE_URL: process.env.API_BASE_URL,
+      QIITA_AUTH_TOKEN: process.env.QIITA_AUTH_TOKEN,
     },
     /*
      ** Headers of the page

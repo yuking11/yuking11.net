@@ -3,13 +3,18 @@
     <div class="post-inner">
       <SectionTitle title="Works" />
 
-      <PostList>
-        <PostListItem />
-        <PostListItem />
-        <PostListItem />
-        <PostListItem />
-        <PostListItem />
-      </PostList>
+      <div class="post-content">
+        <template v-if="$fetch.pending">
+          <Loading />
+        </template>
+        <PostList v-else>
+          <PostListItem />
+          <PostListItem />
+          <PostListItem />
+          <PostListItem />
+          <PostListItem />
+        </PostList>
+      </div>
 
       <div class="button-wrapper">
         <Button
@@ -40,6 +45,7 @@ import SectionTitle from '~/components/modules/SectionTitle.vue'
 import PostList from '~/components/modules/PostList.vue'
 import PostListItem from '~/components/modules/PostListItem.vue'
 import Button from '~/components/modules/Button.vue'
+import Loading from '~/components/modules/Loading.vue'
 
 export default defineComponent({
   components: {
@@ -47,6 +53,7 @@ export default defineComponent({
     PostList,
     PostListItem,
     Button,
+    Loading,
   },
   setup() {
     const getMorePost = () => {
@@ -62,6 +69,10 @@ export default defineComponent({
 <style lang="scss" scoped>
 .post-inner {
   @include inner();
+}
+
+.post-content {
+  position: relative;
 }
 
 .button-wrapper {

@@ -1,11 +1,6 @@
 <template>
   <article class="post-item">
-    <a
-      href="https://www.example.com/"
-      class="post-link"
-      target="_blank"
-      rel="noreferrer"
-    >
+    <a :href="url" class="post-link" target="_blank" rel="noreferrer">
       <div class="post-head">
         <img
           src="~/assets/img/top/qiita_logo.png"
@@ -13,24 +8,24 @@
           class="post-img"
         />
         <div class="post-summary">
-          <div class="post-summary-title">ダミータイトル</div>
-          <p class="post-summary-text">ダミーディスクリプション</p>
+          <div class="post-summary-title">{{ title }}</div>
+          <p class="post-summary-text">投稿日時：{{ createdDate }}</p>
+          <p class="post-summary-text">更新日時：{{ updatedDate }}</p>
         </div>
       </div>
-      <h3 class="post-title">ダミータイトル</h3>
+      <h3 class="post-title">{{ title }}</h3>
       <div class="post-meta">
         <SvgIcon name="thumbs-up" title="thumbs-up" />
-        <p class="post-likes">いいね<span class="ml-2">10</span></p>
+        <p class="post-likes">
+          いいね<span class="ml-2">{{ likesCount }}</span>
+        </p>
       </div>
       <div class="post-meta">
         <SvgIcon name="tags" title="タグ" />
         <ul class="post-tag">
-          <li class="tag-item">タグ1</li>
-          <li class="tag-item">タグ2</li>
-          <li class="tag-item">タグ3</li>
-          <li class="tag-item">タグ3</li>
-          <li class="tag-item">タグ3</li>
-          <li class="tag-item">タグ3</li>
+          <li v-for="tag in tags" :key="tag.name" class="tag-item">
+            {{ tag.name }}
+          </li>
         </ul>
       </div>
     </a>
@@ -38,22 +33,60 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'nuxt-composition-api'
+import { defineComponent, computed } from 'nuxt-composition-api'
+import dayjs from 'dayjs'
+import { Qiita } from '~/types/qiita'
 
 type Props = Readonly<{
-  fill: string
+  createdAt: Qiita['created_at']
+  likesCount: Qiita['likes_count']
+  tags: Qiita['tags']
+  title: Qiita['title']
+  updatedAt: Qiita['updated_at']
+  url: Qiita['url']
 }>
 
 export default defineComponent({
   props: {
-    fill: {
-      type: String as () => Props['fill'],
-      default: '#000',
+    createdAt: {
+      type: String as () => Props['createdAt'],
+      default: '',
+    },
+    likesCount: {
+      type: Number as () => Props['likesCount'],
+      required: true,
+    },
+    tags: {
+      type: Array as () => Props['tags'],
+      default: () => [],
+    },
+    title: {
+      type: String as () => Props['title'],
+      required: true,
+    },
+    updatedAt: {
+      type: String as () => Props['updatedAt'],
+      default: '',
+    },
+    url: {
+      type: String as () => Props['url'],
+      required: true,
     },
   },
   setup(props: Props) {
+    // computed
+
+    const createdDate = computed(() =>
+      dayjs(props.createdAt).format('YYYY年MM月DD日 HH:mm')
+    )
+
+    const updatedDate = computed(() =>
+      dayjs(props.updatedAt).format('YYYY年MM月DD日 HH:mm')
+    )
+
     return {
-      props,
+      createdDate,
+      updatedDate,
     }
   },
 })
@@ -63,10 +96,10 @@ export default defineComponent({
 .post-item {
   padding-bottom: $ct_gutter;
   box-shadow: 0 1px 2px 2px rgba(#666, 0.15);
-  transition: all 0.35s;
+  transition: box-shadow 0.5s;
 
   &:hover {
-    box-shadow: 0 1px 2px 2px rgba(#666, 0.35);
+    box-shadow: 0 2px 2px 2px rgba(#666, 0.35);
     .post-summary {
       top: 0;
     }
@@ -121,7 +154,7 @@ export default defineComponent({
   top: 100%;
   left: 0;
   right: 0;
-  background-color: rgba(#000, 0.65);
+  background-color: rgba(#000, 0.75);
   width: 100%;
   height: 100%;
   padding: $ct_gutter;
@@ -142,6 +175,7 @@ export default defineComponent({
 }
 
 .post-summary-title {
+  margin-bottom: 0.5em;
   font-size: fs(16);
 }
 
@@ -170,7 +204,6 @@ export default defineComponent({
   justify-content: flex-start;
   margin: 0;
   padding: 0 $ct_gutter 0 ($ct_gutter * 2.5);
-  color: $font_color_light;
   font-size: fs(14);
 
   + .post-meta {

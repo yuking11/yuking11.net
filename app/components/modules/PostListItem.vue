@@ -63,10 +63,10 @@ export default defineComponent({
 .post-item {
   padding-bottom: $ct_gutter;
   box-shadow: 0 1px 2px 2px rgba(#666, 0.15);
-  transition: all 0.35s;
+  transition: box-shadow 0.35s;
 
   &:hover {
-    box-shadow: 0 1px 2px 2px rgba(#666, 0.35);
+    box-shadow: 0 2px 2px 2px rgba(#666, 0.35);
     .post-summary {
       top: 0;
     }
@@ -121,7 +121,7 @@ export default defineComponent({
   top: 100%;
   left: 0;
   right: 0;
-  background-color: rgba(#000, 0.65);
+  background-color: rgba(#000, 0.75);
   width: 100%;
   height: 100%;
   padding: $ct_gutter;
@@ -170,7 +170,6 @@ export default defineComponent({
   justify-content: flex-start;
   margin: 0;
   padding: 0 $ct_gutter 0 ($ct_gutter * 2.5);
-  color: $font_color_light;
   font-size: fs(14);
 
   + .post-meta {
