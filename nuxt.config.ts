@@ -1,5 +1,4 @@
 import { resolve } from 'path'
-import internalIp from 'internal-ip'
 // Use dart-sass
 import Fiber from 'fibers'
 import Sass from 'sass'
@@ -10,19 +9,6 @@ const envFile = `.env.${env}`
 require('dotenv').config({ path: resolve(__dirname, 'env', envFile) })
 
 export default async () => {
-  const hasHostnameArg = process.argv.includes('--hostname')
-  if (hasHostnameArg && env === 'develop') {
-    const ip = await internalIp.v4()
-    const { API_BASE_URL } = process.env
-    if (!API_BASE_URL || !ip) {
-      return
-    }
-    process.env.API_BASE_URL = API_BASE_URL.replace(
-      /localhost|127\.0\.0\.1|0\.0\.0\.0/,
-      ip
-    )
-  }
-
   const nuxtConfig = {
     /*
      ** Nuxt rendering mode
@@ -39,11 +25,10 @@ export default async () => {
     },
     srcDir: 'app',
     router: {
-      base:
-        process.env.DEPLOY_ENV === 'GH_PAGES'
-          ? '/yuking11.net/'
-          : process.env.BASE_DIR,
-      // middleware: ['auth'],
+      base: process.env.BASE_DIR,
+      // process.env.DEPLOY_ENV === 'GH_PAGES'
+      //   ? '/yuking11.net/'
+      //   : process.env.BASE_DIR,
     },
     env: {
       BASE_URL: process.env.BASE_URL,
@@ -62,17 +47,20 @@ export default async () => {
         {
           hid: 'description',
           name: 'description',
-          content: process.env.npm_package_description || '',
+          content:
+            '@Yuking11のポートフォリオサイトです。過去の制作物やQiita記事等を紹介しています。' ||
+            process.env.npm_package_description ||
+            '',
         },
       ],
       link: [
         {
           rel: 'icon',
           type: 'image/x-icon',
-          href:
-            process.env.DEPLOY_ENV === 'GH_PAGES'
-              ? '/yuking11.net/favicon.ico'
-              : '/favicon.ico',
+          href: '/favicon.ico',
+          // process.env.DEPLOY_ENV === 'GH_PAGES'
+          //   ? '/yuking11.net/favicon.ico'
+          //   : '/favicon.ico',
         },
         {
           rel: 'stylesheet',
