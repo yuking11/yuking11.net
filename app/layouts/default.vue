@@ -2,7 +2,7 @@
   <div>
     <TheHeader />
     <Nuxt />
-    <TheContact />
+    <TheContact id="contact" />
     <TheFooter />
     <HeaderNavCollapse />
   </div>

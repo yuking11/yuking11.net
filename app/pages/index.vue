@@ -5,9 +5,9 @@
       :title="'Yuki Saito\'s\nPortfolio Site'"
       note="Frontend Engineer"
     />
-    <TopAbout class="section section-about" />
-    <TopWorks class="section section-works" />
-    <TopBlog class="section section-blog" />
+    <TopAbout id="about" class="section section-about" />
+    <TopWorks id="works" class="section section-works" />
+    <TopBlog id="blog" class="section section-blog" />
   </div>
 </template>
 

@@ -109,7 +109,11 @@ export default async () => {
     /*
      ** Plugins to load before mounting the App
      */
-    plugins: ['~/plugins/composition-api', '~/plugins/vee-validate'],
+    plugins: [
+      '~/plugins/composition-api',
+      '~/plugins/vee-validate',
+      '~/plugins/vue-scrollto',
+    ],
     /*
      ** Nuxt.js dev-modules
      */

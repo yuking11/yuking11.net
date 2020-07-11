@@ -1,19 +1,24 @@
 <template>
   <div class="header-nav-collapse">
-    <input id="nav-toggle" type="checkbox" name="nav-toggle" />
+    <input
+      id="nav-toggle"
+      v-model="isCollapse"
+      type="checkbox"
+      name="nav-toggle"
+    />
     <label for="nav-toggle" class="nav-toggle-button">
       <span class="nav-toggle-icon"></span>
     </label>
     <label for="nav-toggle" class="nav-toggle-overlay"></label>
     <div class="nav-toggle-menu">
       <SnsList class="collapse-sns" />
-      <HeaderNav class="collapse-nav" />
+      <HeaderNav class="collapse-nav" @click="move" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'nuxt-composition-api'
+import { defineComponent, ref } from 'nuxt-composition-api'
 import HeaderNav from '~/components/common/header/HeaderNav.vue'
 import SnsList from '~/components/modules/SnsList.vue'
 
@@ -21,6 +26,21 @@ export default defineComponent({
   components: {
     HeaderNav,
     SnsList,
+  },
+  setup() {
+    // data
+
+    const isCollapse = ref(false)
+    // method
+
+    const move = () => {
+      isCollapse.value = !isCollapse.value
+    }
+
+    return {
+      isCollapse,
+      move,
+    }
   },
 })
 </script>

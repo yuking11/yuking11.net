@@ -2,19 +2,41 @@
   <nav class="header-nav">
     <ul class="nav">
       <li class="nav-item">
-        <a href="#" class="nav-link">Home</a>
+        <a v-scroll-to="'body'" href="#" class="nav-link" @click="onClick"
+          >Home</a
+        >
       </li>
       <li class="nav-item">
-        <a href="#about" class="nav-link">About</a>
+        <a
+          v-scroll-to="'#about'"
+          href="#about"
+          class="nav-link"
+          @click="onClick"
+          >About</a
+        >
       </li>
       <li class="nav-item">
-        <a href="#portfolio" class="nav-link">Portfolio</a>
+        <a
+          v-scroll-to="'#works'"
+          href="#works"
+          class="nav-link"
+          @click="onClick"
+          >Works</a
+        >
       </li>
       <li class="nav-item">
-        <a href="#qiita" class="nav-link">Qiita</a>
+        <a v-scroll-to="'#blog'" href="#blog" class="nav-link" @click="onClick"
+          >Qiita</a
+        >
       </li>
       <li class="nav-item">
-        <a href="#contact" class="nav-link">Contact</a>
+        <a
+          v-scroll-to="'#contact'"
+          href="#contact"
+          class="nav-link"
+          @click="onClick"
+          >Contact</a
+        >
       </li>
     </ul>
   </nav>
@@ -23,7 +45,17 @@
 <script lang="ts">
 import { defineComponent } from 'nuxt-composition-api'
 
-export default defineComponent({})
+export default defineComponent({
+  setup(_props, { emit }) {
+    // method
+
+    const onClick = () => {
+      emit('click')
+    }
+
+    return { onClick }
+  },
+})
 </script>
 
 <style lang="scss" scoped>

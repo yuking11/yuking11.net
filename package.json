@@ -75,6 +75,7 @@
     "svg-inline-loader": "^0.8.2",
     "ts-jest": "^26.1.0",
     "vee-validate": "^3.3.5",
-    "vue-jest": "^3.0.4"
+    "vue-jest": "^3.0.4",
+    "vue-scrollto": "^2.18.1"
   }
 }
