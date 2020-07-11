@@ -5,7 +5,7 @@
 
       <div class="post-content">
         <template v-if="$fetch.pending">
-          <Loading />
+          <Loading class="is-loading" />
         </template>
         <PostList v-else>
           <PostListItem
@@ -21,13 +21,14 @@
         </PostList>
       </div>
 
-      <div class="button-wrapper">
+      <div v-if="canGetData" class="button-wrapper">
         <Button
           text="More"
           size="xl"
           variant="black"
           icon="refresh"
-          @click="getMorePost"
+          :is-fetching="$fetch.pending"
+          @click="$fetch"
         />
       </div>
     </div>
@@ -40,6 +41,7 @@ import {
   // useContext,
   // useMeta,
   useFetch,
+  computed,
   // reactive,
   ref,
   // toRefs,
@@ -64,24 +66,34 @@ export default defineComponent({
     Loading,
   },
   setup() {
-    const { worksData } = useWorks()
+    // use works
 
-    const getMorePost = () => {
-      return window.alert('getMorePost')
-    }
+    const { canGetData, worksData } = useWorks()
 
     return {
+      canGetData,
       worksData,
-      getMorePost,
     }
   },
 })
 
 type UseWorks = {
+  canGetData: Ref<boolean>
   worksData: Ref<Works>
 }
 
 const useWorks = (): UseWorks => {
+  // computed
+
+  const canGetData = computed(() => {
+    return state.value.totalCount > state.value.contents.length
+  })
+
+  // create data
+
+  const limit = ref(6)
+  const count = 6
+
   const state = ref<Works>({
     contents: [],
     totalCount: 0,
@@ -97,7 +109,7 @@ const useWorks = (): UseWorks => {
         'X-API-KEY': process.env.API_TOKEN,
       },
       params: {
-        limit: 6,
+        limit: limit.value,
         offset: 0,
       },
     })
@@ -114,9 +126,12 @@ const useWorks = (): UseWorks => {
       }
       return item
     })
+
+    limit.value = limit.value + count
   })
 
   return {
+    canGetData,
     worksData: state,
   }
 }
@@ -129,6 +144,16 @@ const useWorks = (): UseWorks => {
 
 .post-content {
   position: relative;
+}
+
+.is-loading {
+  text-align: center;
+  opacity: 0.65;
+
+  ::v-deep svg {
+    width: 80px;
+    height: 80px;
+  }
 }
 
 .button-wrapper {

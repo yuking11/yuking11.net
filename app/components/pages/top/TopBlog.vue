@@ -5,7 +5,7 @@
 
       <div class="post-content">
         <template v-if="$fetch.pending">
-          <Loading />
+          <Loading class="is-loading" />
         </template>
         <PostList v-else>
           <PostListItemQiita
@@ -109,6 +109,16 @@ const useBlog = (): UseBlog => {
 
 .post-content {
   position: relative;
+}
+
+.is-loading {
+  text-align: center;
+  opacity: 0.65;
+
+  ::v-deep svg {
+    width: 80px;
+    height: 80px;
+  }
 }
 
 .button-wrapper {

@@ -5,7 +5,7 @@
     class="btn"
     :class="[
       variant ? (outline ? `btn-${variant}-outline` : `btn-${variant}`) : '',
-      icon ? `btn-icon btn-icon-${icon}` : '',
+      icon ? (!isFetching ? `btn-icon btn-icon-${icon}` : '') : '',
       size ? `btn-${size}` : '',
       block ? 'btn-block' : '',
       isFetching ? 'is-fetching' : '',
@@ -14,8 +14,13 @@
     :disabled="isDisabled"
     @click="onClick"
   >
-    <span class="btn-text">{{ text }}</span>
-    <SvgIcon v-if="icon" :name="icon" :title="icon" />
+    <template v-if="isFetching">
+      <Loading />
+    </template>
+    <template v-else>
+      <span class="btn-text">{{ text }}</span>
+      <SvgIcon v-if="icon" :name="icon" :title="icon" />
+    </template>
   </component>
 </template>
 
@@ -31,6 +36,7 @@ import {
   // toRefs,
   // SetupContext,
 } from 'nuxt-composition-api'
+import Loading from '~/components/modules/Loading.vue'
 import { variantList } from '~/utils/config'
 
 type Props = Readonly<{
@@ -47,6 +53,9 @@ type Props = Readonly<{
 }>
 
 export default defineComponent({
+  components: {
+    Loading,
+  },
   props: {
     text: {
       type: String as () => Props['text'],
@@ -121,9 +130,11 @@ export default defineComponent({
   text-align: center;
   text-decoration: none;
   line-height: 1.4;
+  box-sizing: border-box;
   cursor: pointer;
   transition: color 0.2s, background-color 0.2s, border-color 0.2s,
     box-shadow 0.2s;
+
   &:hover {
     background-color: $btn_default_bg_hover;
   }
@@ -214,16 +225,19 @@ export default defineComponent({
 // size
 
 .btn-sm {
+  min-width: 80px;
   padding: ($ct_gutter / 4) $ct_gutter_half;
   font-size: fs(14);
 }
 
 .btn-lg {
+  min-width: 100px;
   padding: $ct_gutter_half $ct_gutter;
   font-size: fs(18);
 }
 
 .btn-xl {
+  min-width: 140px;
   padding: $ct_gutter_half ($ct_gutter * 2);
   font-size: fs(20);
 }
@@ -407,10 +421,16 @@ export default defineComponent({
 }
 
 .is-fetching {
+  opacity: 0.45;
+  pointer-events: none;
+  ::v-deep svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 }
 
 .is-disabled {
-  opacity: 0.65;
+  opacity: 0.45;
   pointer-events: none;
 }
 </style>
