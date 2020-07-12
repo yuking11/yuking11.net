@@ -39,7 +39,7 @@ export default defineComponent({
   setup() {
     // meta
     useMeta({
-      title: process.env.SITE_NAME,
+      title: 'Yuki Saito’s Portfolio Site',
     })
 
     return {}
