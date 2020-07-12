@@ -31,6 +31,7 @@
   "dependencies": {
     "@nuxt/typescript-runtime": "^0.4.10",
     "@nuxtjs/axios": "^5.11.0",
+    "@nuxtjs/google-tag-manager": "^2.3.2",
     "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
     "nuxt": "^2.13.0",

@@ -43,7 +43,9 @@ export default async () => {
     head: {
       meta: [
         { charset: 'utf-8' },
+        { name: 'X-UA-Compatible', content: 'IE=edge' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'format-detection', content: 'telephone=no' },
         {
           hid: 'description',
           name: 'description',
@@ -108,6 +110,7 @@ export default async () => {
     buildModules: [
       '@nuxt/typescript-build',
       'nuxt-composition-api',
+      ['@nuxtjs/google-tag-manager', { id: process.env.GOOGLE_TAG_MANAGER }], // 追記
       '@nuxtjs/style-resources',
       // Doc: https://github.com/nuxt-community/stylelint-module
       '@nuxtjs/stylelint-module',
