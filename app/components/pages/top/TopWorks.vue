@@ -4,7 +4,7 @@
       <SectionTitle title="Works" />
 
       <div class="post-content">
-        <template v-if="$fetch.pending">
+        <template v-if="$fetchState.pending && count === 0">
           <Loading class="is-loading" />
         </template>
         <PostList v-else>
@@ -27,7 +27,7 @@
           size="xl"
           variant="black"
           icon="refresh"
-          :is-fetching="$fetch.pending"
+          :is-fetching="$fetchState.pending"
           @click="$fetch"
         />
       </div>
@@ -68,9 +68,10 @@ export default defineComponent({
   setup() {
     // use works
 
-    const { canGetData, worksData } = useWorks()
+    const { count, canGetData, worksData } = useWorks()
 
     return {
+      count,
       canGetData,
       worksData,
     }
@@ -78,6 +79,7 @@ export default defineComponent({
 })
 
 type UseWorks = {
+  count: Ref<number>
   canGetData: Ref<boolean>
   worksData: Ref<Works>
 }
@@ -91,8 +93,8 @@ const useWorks = (): UseWorks => {
 
   // create data
 
-  const limit = ref(6)
-  const count = 6
+  const limit = 6
+  const count = ref(0)
 
   const state = ref<Works>({
     contents: [],
@@ -109,8 +111,8 @@ const useWorks = (): UseWorks => {
         'X-API-KEY': process.env.API_TOKEN,
       },
       params: {
-        limit: limit.value,
-        offset: 0,
+        limit,
+        offset: count.value * limit,
       },
     })
 
@@ -118,19 +120,19 @@ const useWorks = (): UseWorks => {
       throw new Error(err.message)
     }
 
-    state.value = cloneDeep(data)
+    if (count.value === 0) {
+      state.value = cloneDeep(data)
+    } else if (count.value > 0) {
+      state.value.contents.push(...data.contents)
+      state.value.offset = data.offset
+      state.value.totalCount = data.totalCount
+    }
 
-    state.value.contents.map((item) => {
-      if (item.image) {
-        item.image = require(`~/assets/img/works/${item.image}`)
-      }
-      return item
-    })
-
-    limit.value = limit.value + count
+    count.value++
   })
 
   return {
+    count,
     canGetData,
     worksData: state,
   }

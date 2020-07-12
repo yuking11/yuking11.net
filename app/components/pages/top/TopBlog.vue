@@ -4,7 +4,7 @@
       <SectionTitle title="Qiita" />
 
       <div class="post-content">
-        <template v-if="$fetch.pending">
+        <template v-if="$fetchState.pending">
           <Loading class="is-loading" />
         </template>
         <PostList v-else>
