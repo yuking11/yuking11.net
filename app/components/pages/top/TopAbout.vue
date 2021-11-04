@@ -23,46 +23,6 @@
           </p>
         </div>
       </div>
-
-      <SectionTitleSub title="Skills" />
-      <dl class="skill">
-        <div class="skill-row">
-          <SkillRating class="skill-column" term="HTML" :rating="4" />
-          <SkillRating class="skill-column" term="CSS／SCSS" :rating="4" />
-        </div>
-        <div class="skill-row">
-          <SkillRating class="skill-column" term="JavaScript" :rating="3" />
-          <SkillRating class="skill-column" term="Node.js" :rating="2" />
-        </div>
-        <div class="skill-row">
-          <SkillRating class="skill-column" term="jQuery" :rating="3" />
-          <SkillRating class="skill-column" term="TypeScript" :rating="2" />
-        </div>
-        <div class="skill-row">
-          <SkillRating class="skill-column" term="gulp" :rating="3" />
-          <SkillRating class="skill-column" term="webpack" :rating="3" />
-        </div>
-        <div class="skill-row">
-          <SkillRating class="skill-column" term="Nuxt/Vue" :rating="3" />
-          <SkillRating class="skill-column" term="React" :rating="0" />
-        </div>
-        <div class="skill-row">
-          <SkillRating class="skill-column" term="PHP" :rating="2" />
-          <SkillRating class="skill-column" term="MySQL" :rating="2" />
-        </div>
-        <div class="skill-row">
-          <SkillRating class="skill-column" term="Git" :rating="3" />
-          <SkillRating class="skill-column" term="Github" :rating="3" />
-        </div>
-        <div class="skill-row">
-          <SkillRating class="skill-column" term="CircleCI" :rating="1" />
-          <SkillRating class="skill-column" term="Linux" :rating="2" />
-        </div>
-        <div class="skill-row">
-          <SkillRating class="skill-column" term="Web Design" :rating="0" />
-          <SkillRating class="skill-column" term="Management" :rating="0" />
-        </div>
-      </dl>
     </div>
   </section>
 </template>
@@ -80,14 +40,10 @@ import {
   // SetupContext,
 } from 'nuxt-composition-api'
 import SectionTitle from '~/components/modules/SectionTitle.vue'
-import SectionTitleSub from '~/components/modules/SectionTitleSub.vue'
-import SkillRating from '~/components/modules/SkillRating.vue'
 
 export default defineComponent({
   components: {
     SectionTitle,
-    SectionTitleSub,
-    SkillRating,
   },
   setup() {
     return {}
