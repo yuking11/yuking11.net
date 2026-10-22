@@ -1,6 +1,5 @@
 import { resolve } from 'path'
 // Use dart-sass
-import Fiber from 'fibers'
 import Sass from 'sass'
 // setup env
 const env = process.env.NODE_ENV
@@ -12,9 +11,9 @@ export default async () => {
   const nuxtConfig = {
     /*
      ** Nuxt rendering mode
-     ** See https://nuxtjs.org/api/configuration-mode
+     ** See https://nuxtjs.org/docs/configuration-glossary/configuration-ssr
      */
-    mode: 'spa',
+    ssr: false,
     /*
      ** Nuxt target
      ** See https://nuxtjs.org/api/configuration-target
@@ -99,17 +98,13 @@ export default async () => {
     /*
      ** Plugins to load before mounting the App
      */
-    plugins: [
-      '~/plugins/composition-api',
-      '~/plugins/vee-validate',
-      '~/plugins/vue-scrollto',
-    ],
+    plugins: ['~/plugins/vee-validate', '~/plugins/vue-scrollto'],
     /*
      ** Nuxt.js dev-modules
      */
     buildModules: [
       '@nuxt/typescript-build',
-      'nuxt-composition-api',
+      '@nuxtjs/composition-api/module',
       ['@nuxtjs/google-tag-manager', { id: process.env.GOOGLE_TAG_MANAGER }], // 追記
       '@nuxtjs/style-resources',
       // Doc: https://github.com/nuxt-community/stylelint-module
@@ -168,22 +163,16 @@ export default async () => {
         chunk: ({ isDev }: { isDev: any }) =>
           isDev ? '[name].[hash].js' : '[chunkhash].js',
       },
-      extend(config: any) {
-        const vueLoader = config.module.rules.find(
-          (rule: any) => rule.loader === 'vue-loader'
-        )
-        vueLoader.options.transformAssetUrls = {
-          video: ['src', 'poster'],
-          source: 'src',
-        }
-      },
       transpile: ['vee-validate/dist/rules'],
       loaders: {
+        vue: {
+          transformAssetUrls: {
+            video: ['src', 'poster'],
+            source: 'src',
+          },
+        },
         scss: {
           implementation: Sass,
-          sassOptions: {
-            fiber: Fiber,
-          },
         },
       },
     },

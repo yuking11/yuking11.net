@@ -35,7 +35,7 @@ import {
   ref,
   // toRefs,
   // SetupContext,
-} from 'nuxt-composition-api'
+} from '@nuxtjs/composition-api'
 import Loading from '~/components/modules/Loading.vue'
 import { variantList } from '~/utils/config'
 

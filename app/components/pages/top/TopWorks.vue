@@ -44,10 +44,10 @@ import {
   computed,
   // reactive,
   ref,
+  Ref,
   // toRefs,
   // SetupContext,
-} from 'nuxt-composition-api'
-import { Ref } from '@vue/composition-api'
+} from '@nuxtjs/composition-api'
 import cloneDeep from 'lodash/cloneDeep'
 import { Works } from '~/types/api-schema'
 import SectionTitle from '~/components/modules/SectionTitle.vue'

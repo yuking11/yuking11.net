@@ -9,33 +9,22 @@ on:
 
 jobs:
   build-deploy:
-    runs-on: ubuntu-18.04
-
-    strategy:
-      matrix:
-        node-version: [12.x]
+    runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
-    - name: Setup node ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+    - name: Setup node
+      uses: actions/setup-node@v4
       with:
-        node-version: ${{ matrix.node-version }}
-
-    - name: Cache node modules
-      uses: actions/cache@v1
-      with:
-        path: node_modules
-        key: ${{ runner.OS }}-yarn-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: |
-          ${{ runner.OS }}-yarn-
+        node-version-file: .node-version
+        cache: yarn
 
     - name: Create .env file
       run: echo "${{ secrets.ENV_PROD }}" > env/.env.production
 
     - name: yarn install
-      run: yarn install
+      run: yarn install --frozen-lockfile
 
     - name: yarn lint
       run: yarn lint

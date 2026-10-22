@@ -22,7 +22,7 @@ import {
   // ref,
   // toRefs,
   // SetupContext,
-} from 'nuxt-composition-api'
+} from '@nuxtjs/composition-api'
 import TheHero from '~/components/common/TheHero.vue'
 import TopAbout from '~/components/pages/top/TopAbout.vue'
 import TopWorks from '~/components/pages/top/TopWorks.vue'

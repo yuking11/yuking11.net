@@ -38,8 +38,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, useFetch, ref } from 'nuxt-composition-api'
-import { Ref } from '@vue/composition-api'
+import { defineComponent, useFetch, ref, Ref } from '@nuxtjs/composition-api'
 import cloneDeep from 'lodash/cloneDeep'
 import { fetchApi } from '~/utils/fetchApi'
 import { Qiita } from '~/types/qiita'

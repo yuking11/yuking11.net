@@ -38,7 +38,7 @@ import {
   // ref,
   // toRefs,
   // SetupContext,
-} from 'nuxt-composition-api'
+} from '@nuxtjs/composition-api'
 import SectionTitle from '~/components/modules/SectionTitle.vue'
 
 export default defineComponent({
