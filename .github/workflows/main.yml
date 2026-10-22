@@ -35,7 +35,9 @@ jobs:
     - name: yarn generate
       run: yarn generate:gh-pages
 
+    # PR ではビルド確認のみ行い、master への push 時だけデプロイする
     - name: deploy
+      if: github.event_name == 'push'
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
