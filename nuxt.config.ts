@@ -1,6 +1,5 @@
 import { resolve } from 'path'
 // Use dart-sass
-import Fiber from 'fibers'
 import Sass from 'sass'
 // setup env
 const env = process.env.NODE_ENV
@@ -12,9 +11,9 @@ export default async () => {
   const nuxtConfig = {
     /*
      ** Nuxt rendering mode
-     ** See https://nuxtjs.org/api/configuration-mode
+     ** See https://nuxtjs.org/docs/configuration-glossary/configuration-ssr
      */
-    mode: 'spa',
+    ssr: true,
     /*
      ** Nuxt target
      ** See https://nuxtjs.org/api/configuration-target
@@ -32,9 +31,15 @@ export default async () => {
     },
     env: {
       BASE_URL: process.env.BASE_URL,
-      API_BASE_URL: process.env.API_BASE_URL,
-      API_TOKEN: process.env.API_TOKEN,
-      QIITA_AUTH_TOKEN: process.env.QIITA_AUTH_TOKEN,
+    },
+    /*
+     ** Server-only config (used at generate time, never shipped to the client)
+     ** See https://nuxtjs.org/docs/configuration-glossary/configuration-runtime-config
+     */
+    privateRuntimeConfig: {
+      apiBaseUrl: process.env.API_BASE_URL,
+      apiToken: process.env.API_TOKEN,
+      qiitaAuthToken: process.env.QIITA_AUTH_TOKEN,
     },
     /*
      ** Headers of the page
@@ -99,17 +104,13 @@ export default async () => {
     /*
      ** Plugins to load before mounting the App
      */
-    plugins: [
-      '~/plugins/composition-api',
-      '~/plugins/vee-validate',
-      '~/plugins/vue-scrollto',
-    ],
+    plugins: ['~/plugins/vee-validate', '~/plugins/vue-scrollto'],
     /*
      ** Nuxt.js dev-modules
      */
     buildModules: [
       '@nuxt/typescript-build',
-      'nuxt-composition-api',
+      '@nuxtjs/composition-api/module',
       ['@nuxtjs/google-tag-manager', { id: process.env.GOOGLE_TAG_MANAGER }], // 追記
       '@nuxtjs/style-resources',
       // Doc: https://github.com/nuxt-community/stylelint-module
@@ -168,22 +169,16 @@ export default async () => {
         chunk: ({ isDev }: { isDev: any }) =>
           isDev ? '[name].[hash].js' : '[chunkhash].js',
       },
-      extend(config: any) {
-        const vueLoader = config.module.rules.find(
-          (rule: any) => rule.loader === 'vue-loader'
-        )
-        vueLoader.options.transformAssetUrls = {
-          video: ['src', 'poster'],
-          source: 'src',
-        }
-      },
       transpile: ['vee-validate/dist/rules'],
       loaders: {
+        vue: {
+          transformAssetUrls: {
+            video: ['src', 'poster'],
+            source: 'src',
+          },
+        },
         scss: {
           implementation: Sass,
-          sassOptions: {
-            fiber: Fiber,
-          },
         },
       },
     },

@@ -21,7 +21,7 @@ import {
   // ref,
   // toRefs,
   // SetupContext,
-} from 'nuxt-composition-api'
+} from '@nuxtjs/composition-api'
 
 type Props = Readonly<{
   term: string

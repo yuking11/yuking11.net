@@ -38,8 +38,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, useFetch, ref } from 'nuxt-composition-api'
-import { Ref } from '@vue/composition-api'
+import {
+  defineComponent,
+  useContext,
+  useFetch,
+  ref,
+  Ref,
+} from '@nuxtjs/composition-api'
 import cloneDeep from 'lodash/cloneDeep'
 import { fetchApi } from '~/utils/fetchApi'
 import { Qiita } from '~/types/qiita'
@@ -71,16 +76,18 @@ type UseBlog = {
 }
 
 const useBlog = (): UseBlog => {
+  const { $config } = useContext()
   const state = ref<Qiita[]>([])
 
   // life cycle event
 
+  // generate 時にサーバー側でのみ実行される（トークンはクライアントに渡さない）
   useFetch(async () => {
     const { data, err } = await fetchApi<Qiita[]>(
       'https://qiita.com/api/v2/authenticated_user/items',
       {
         headers: {
-          Authorization: `Bearer ${process.env.QIITA_AUTH_TOKEN}`,
+          Authorization: `Bearer ${$config.qiitaAuthToken}`,
         },
         params: {
           page: 1,

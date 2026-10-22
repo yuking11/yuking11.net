@@ -21,7 +21,7 @@ import {
   // ref,
   // toRefs,
   // SetupContext,
-} from 'nuxt-composition-api'
+} from '@nuxtjs/composition-api'
 import { variantList } from '~/utils/config'
 
 type Props = Readonly<{

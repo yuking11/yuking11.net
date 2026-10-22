@@ -21,7 +21,7 @@ import {
   // ref,
   // toRefs,
   // SetupContext,
-} from 'nuxt-composition-api'
+} from '@nuxtjs/composition-api'
 import SectionTitle from '~/components/modules/SectionTitle.vue'
 import SnsList from '~/components/modules/SnsList.vue'
 

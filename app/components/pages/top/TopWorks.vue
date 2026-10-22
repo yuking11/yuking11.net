@@ -4,12 +4,12 @@
       <SectionTitle title="Works" />
 
       <div class="post-content">
-        <template v-if="$fetchState.pending && count === 0">
+        <template v-if="$fetchState.pending">
           <Loading class="is-loading" />
         </template>
         <PostList v-else>
           <PostListItem
-            v-for="item in worksData.contents"
+            v-for="item in worksData"
             :key="item.id"
             :title="item.title"
             :description="item.description"
@@ -27,8 +27,7 @@
           size="xl"
           variant="black"
           icon="refresh"
-          :is-fetching="$fetchState.pending"
-          @click="$fetch"
+          @click="showMore"
         />
       </div>
     </div>
@@ -38,18 +37,17 @@
 <script lang="ts">
 import {
   defineComponent,
-  // useContext,
+  useContext,
   // useMeta,
   useFetch,
   computed,
   // reactive,
   ref,
+  Ref,
   // toRefs,
   // SetupContext,
-} from 'nuxt-composition-api'
-import { Ref } from '@vue/composition-api'
-import cloneDeep from 'lodash/cloneDeep'
-import { Works } from '~/types/api-schema'
+} from '@nuxtjs/composition-api'
+import { Works, Contents } from '~/types/api-schema'
 import SectionTitle from '~/components/modules/SectionTitle.vue'
 import { fetchApi } from '~/utils/fetchApi'
 import PostList from '~/components/modules/PostList.vue'
@@ -68,73 +66,88 @@ export default defineComponent({
   setup() {
     // use works
 
-    const { count, canGetData, worksData } = useWorks()
+    const { works, canGetData, worksData, showMore } = useWorks()
 
     return {
-      count,
+      // fetch の結果はこの ref 経由でペイロードに保存・復元される
+      works,
       canGetData,
       worksData,
+      showMore,
     }
   },
 })
 
 type UseWorks = {
-  count: Ref<number>
+  works: Ref<Contents[]>
   canGetData: Ref<boolean>
-  worksData: Ref<Works>
+  worksData: Ref<Contents[]>
+  showMore: () => void
 }
 
 const useWorks = (): UseWorks => {
-  // computed
-
-  const canGetData = computed(() => {
-    return state.value.totalCount > state.value.contents.length
-  })
-
   // create data
 
   const limit = 6
-  const count = ref(0)
+  const fetchLimit = 100 // API の 1 リクエストあたりの上限
+  const displayCount = ref(limit)
 
-  const state = ref<Works>({
-    contents: [],
-    totalCount: 0,
-    offset: 0,
-    limit: 6,
+  const state = ref<Contents[]>([])
+
+  const { $config } = useContext()
+
+  // computed
+
+  const worksData = computed(() => state.value.slice(0, displayCount.value))
+
+  const canGetData = computed(() => {
+    return state.value.length > displayCount.value
   })
+
+  // methods
+
+  const showMore = () => {
+    displayCount.value += limit
+  }
 
   // life cycle event
 
+  // generate 時にサーバー側でのみ実行され、全件をペイロードに埋め込む
+  // （API キーはクライアントに渡さない）
   useFetch(async () => {
-    const { data, err } = await fetchApi<Works>('works', {
-      headers: {
-        'X-API-KEY': process.env.API_TOKEN,
-      },
-      params: {
-        limit,
-        offset: count.value * limit,
-      },
-    })
+    const contents: Contents[] = []
+    let totalCount = Infinity
 
-    if (err) {
-      throw new Error(err.message)
+    while (contents.length < totalCount) {
+      const { data, err } = await fetchApi<Works>('works', {
+        baseURL: $config.apiBaseUrl,
+        headers: {
+          'X-API-KEY': $config.apiToken,
+        },
+        params: {
+          limit: fetchLimit,
+          offset: contents.length,
+        },
+      })
+
+      if (err) {
+        throw new Error(err.message)
+      }
+
+      contents.push(...data.contents)
+      totalCount = data.totalCount
+
+      if (data.contents.length === 0) break
     }
 
-    if (count.value === 0) {
-      state.value = cloneDeep(data)
-    } else if (count.value > 0) {
-      state.value.contents.push(...data.contents)
-      state.value.offset = data.offset
-      state.value.totalCount = data.totalCount
-    }
-
-    count.value++
+    state.value = contents
   })
 
   return {
-    count,
+    works: state,
     canGetData,
-    worksData: state,
+    worksData,
+    showMore,
   }
 }
 </script>

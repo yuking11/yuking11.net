@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'nuxt-composition-api'
+import { defineComponent } from '@nuxtjs/composition-api'
 import HeaderLogo from '~/components/common/header/HeaderLogo.vue'
 import HeaderNav from '~/components/common/header/HeaderNav.vue'
 import SnsList from '~/components/modules/SnsList.vue'
