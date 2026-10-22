@@ -13,7 +13,7 @@ export default async () => {
      ** Nuxt rendering mode
      ** See https://nuxtjs.org/docs/configuration-glossary/configuration-ssr
      */
-    ssr: false,
+    ssr: true,
     /*
      ** Nuxt target
      ** See https://nuxtjs.org/api/configuration-target
@@ -31,9 +31,15 @@ export default async () => {
     },
     env: {
       BASE_URL: process.env.BASE_URL,
-      API_BASE_URL: process.env.API_BASE_URL,
-      API_TOKEN: process.env.API_TOKEN,
-      QIITA_AUTH_TOKEN: process.env.QIITA_AUTH_TOKEN,
+    },
+    /*
+     ** Server-only config (used at generate time, never shipped to the client)
+     ** See https://nuxtjs.org/docs/configuration-glossary/configuration-runtime-config
+     */
+    privateRuntimeConfig: {
+      apiBaseUrl: process.env.API_BASE_URL,
+      apiToken: process.env.API_TOKEN,
+      qiitaAuthToken: process.env.QIITA_AUTH_TOKEN,
     },
     /*
      ** Headers of the page

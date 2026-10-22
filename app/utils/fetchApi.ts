@@ -17,9 +17,6 @@ export const fetch = async <T>(
   config: AxiosRequestConfig
 ): Promise<FetchResponse<T>> => {
   const { data, err } = await axios({
-    baseURL: !endpoint.startsWith('https://qiita.com')
-      ? process.env.API_BASE_URL
-      : '',
     url: endpoint,
     ...config,
   })
